@@ -1,11 +1,14 @@
 <template>
-	<tr class="header">
-		<th>Faction</th><th>Focus</th>
-	</tr>
-	<tr v-for="faction in factions" :key="faction.id">
-		<td>{{ faction.name }}</td>
-		<td>{{ faction.focus }}</td>
-	</tr>
+	<table>
+		<tr><td colspan="100%"><h2>Factions</h2></td></tr>
+		<tr class="header">
+			<th>Faction</th><th>Focus</th>
+		</tr>
+		<tr v-for="faction in factions" :key="faction.id">
+			<td>{{ faction.name }}</td>
+			<td>{{ faction.focus }}</td>
+		</tr>
+	</table>
 </template>
 
 <script>

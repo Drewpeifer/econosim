@@ -1,11 +1,14 @@
 <template>
-	<tr class="header">
-		<th>Corporation</th><th>Focus</th>
-	</tr>
-	<tr v-for="corporation in corporations" :key="corporation.id">
-		<td>{{ corporation.name }}</td>
-		<td>{{ corporation.focus }}</td>
-	</tr>
+	<table>
+		<tr><td colspan="100%"><h2>Corporations</h2></td></tr>
+		<tr class="header">
+			<th>Corporation</th><th>Focus</th>
+		</tr>
+		<tr v-for="corporation in corporations" :key="corporation.id">
+			<td>{{ corporation.name }}</td>
+			<td>{{ corporation.focus }}</td>
+		</tr>
+	</table>
 </template>
 
 <script>
