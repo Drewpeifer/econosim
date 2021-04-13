@@ -60,12 +60,18 @@ table, tr, th, td {
 	border-collapse: collapse;
 	border: 1px #333 solid;
 }
+tr td h2 {
+	margin: 0;
+}
 tr.header {
 	background: #333;
 	color: #fff;
 	margin-top: 20px;
 }
-tr td h2 {
-	margin: 0;
+tr.header th {
+	border-right: #888 1px solid;
+}
+tr.header th:last-child {
+	border-right: #000 1px solid;
 }
 </style>
