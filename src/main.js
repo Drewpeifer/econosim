@@ -55,15 +55,22 @@ class Timer {
 		if (!this.startTime) {
 			return 0;
 		}
-
 		if (this.isRunning) {
 			return this.overallTime + this._getTimeElapsedSinceLastStart();
 		}
-
 		return this.overallTime;
 	}
 }
 
+function getRandomInt(min, max) {
+	// inclusive
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+//////////////
+// Page load, counter start, BGS binding
 $(function() {
 	$('#pauseTimer').bind('click', function() {
 		let $this = $(this);
