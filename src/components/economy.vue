@@ -7,10 +7,9 @@
 			</th>
 		</tr>
 		<tr v-for="commodity in commodities" :key="commodity.id">
-			<td>{{ commodity.niceName }}</td>
-			<td>{{ commodity.basePrice }}</td>
-			<td>{{ commodity.flux }}</td>
-			<td>{{ commodity.unitSize }}</td>
+			<td v-for="(v, k) in commodity" :key="k['id']">
+				{{ v }}
+			</td>
 		</tr>
 	</table>
 </template>
@@ -22,7 +21,9 @@
 			return {
 				commoditiesProps : [
 					// TODO - find a better way to show props
-					'Commodity',
+					'ID',
+					'Name',
+					'NiceName',
 					'Base Price',
 					'Flux',
 					'Unit Size'

@@ -2,11 +2,14 @@
 	<table>
 		<tr><td colspan="100%"><h2>Corporations</h2></td></tr>
 		<tr class="header">
-			<th>Corporation</th><th>Focus</th>
+			<th v-for="prop in corporationsProps" :key="prop.index">
+				{{ prop }}
+			</th>
 		</tr>
 		<tr v-for="corporation in corporations" :key="corporation.id">
-			<td>{{ corporation.name }}</td>
-			<td>{{ corporation.focus }}</td>
+			<td v-for="(v, k) in corporation" :key="k['id']">
+				{{ v }}
+			</td>
 		</tr>
 	</table>
 </template>
@@ -16,6 +19,12 @@ export default  {
 	name: 'corporations',
 	data() {
 		return {
+			corporationsProps : [
+				// TODO - find a better way to show props
+				'ID',
+				'Name',
+				'Focus'
+			],
 			corporations : [
 				{
 					id : 0,

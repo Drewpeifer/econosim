@@ -2,11 +2,13 @@
 	<table>
 		<tr><td colspan="100%"><h2>Factions</h2></td></tr>
 		<tr class="header">
-			<th>Faction</th><th>Focus</th>
-		</tr>
+			<th v-for="prop in factionsProps" :key="prop.index">
+				{{ prop }}
+			</th>		</tr>
 		<tr v-for="faction in factions" :key="faction.id">
-			<td>{{ faction.name }}</td>
-			<td>{{ faction.focus }}</td>
+			<td v-for="(v, k) in faction" :key="k['id']">
+				{{ v }}
+			</td>
 		</tr>
 	</table>
 </template>
@@ -16,6 +18,12 @@
 		name: 'factions',
 		data() {
 			return {
+				factionsProps : [
+					// TODO - find a better way to show props
+					'ID',
+					'Name',
+					'Focus'
+				],
 				factions : [
 					{
 						id : 0,
