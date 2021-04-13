@@ -65,6 +65,20 @@ class Timer {
 }
 
 $(function() {
+	$('#pauseTimer').bind('click', function() {
+		let $this = $(this);
+
+		if ($this.hasClass('paused')) {
+			timer.start();
+			$this.removeClass('paused');
+		} else {
+			timer.stop();
+			$this.addClass('paused');
+		}
+	});
+	$('#resetTimer').bind('click', function() {
+		timer.reset();
+	});
 	const timer = new Timer();
 	timer.start();
 	setInterval(() => {

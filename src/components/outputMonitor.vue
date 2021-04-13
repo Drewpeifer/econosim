@@ -1,6 +1,10 @@
 <template>
 	<div class="output-monitor">
-		<p>Elapsed time: <span id="time">0</span>s</p>
+		<div>
+			<p>Elapsed time: <span id="time">0</span>s</p>
+			<button id="pauseTimer">Pause</button><button id="resetTimer">Reset*</button>
+			<p><i>*Resets the timer, not the data</i></p>
+		</div>
 		<economy />
 		<corporations />
 		<factions />
@@ -29,6 +33,9 @@ export default {
 <style>
 body {
 	background: #f2f2f2;
+}
+button.paused {
+	background: yellow;
 }
 h3 {
 	margin: 40px 0 0;
