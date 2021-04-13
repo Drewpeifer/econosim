@@ -23,28 +23,53 @@ export default  {
 				// TODO - find a better way to show props
 				'ID',
 				'Name',
-				'Focus'
+				'Focus',
+				'Jobs (Available)',
+				'Jobs (Active)',
+				'Jobs (Completed)',
+				'Drivers (Total)',
+				'Drivers (Active)'
 			],
 			corporations : [
 				{
 					id : 0,
 					name : 'DriveCorp',
-					focus : 'driving'
+					focus : 'driving',
+					jobsAvailable : 0,
+					jobsActive : 0,
+					jobsCompleted : 0,
+					driversCount : 200,
+					driversActive : 0
 				},
 				{
 					id : 1,
 					name : 'CombatCorp',
-					focus : 'combat'
+					focus : 'combat',
+					jobsAvailable : 0,
+					jobsActive : 0,
+					jobsCompleted : 0,
+					driversCount : 100,
+					driversActive : 0
 				},
 				{
 					id : 2,
 					name : 'ManageCorp',
-					focus : 'management'
+					focus : 'management',
+					jobsAvailable : 0,
+					jobsActive : 0,
+					jobsCompleted : 0,
+					driversCount : 150,
+					driversActive : 0
 				},
 				{
 					id : 3,
 					name : 'IndyCorp',
-					focus : 'none'
+					focus : 'none',
+					jobsAvailable : 0,
+					jobsActive : 0,
+					jobsCompleted : 0,
+					driversCount : 125,
+					driversActive : 0
 				}
 			],
 		}
