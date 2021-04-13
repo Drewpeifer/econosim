@@ -1,5 +1,6 @@
 <template>
 	<div class="output-monitor">
+		<p>Elapsed time: <span id="time">0</span>s</p>
 		<economy />
 		<corporations />
 		<factions />
