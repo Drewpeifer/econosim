@@ -1,6 +1,5 @@
 <template>
-	<div class="table-wrapper">
-		<h2>Output Monitor</h2>
+	<div class="output-monitor">
 		<economy />
 		<corporations />
 		<factions />
@@ -44,28 +43,19 @@ li {
 a {
 	color: #42b983;
 }
-.table-wrapper,
+.output-monitor,
 table {
 	width: 80%;
 	margin: 20px auto;
 }
-.table-wrapper {
-	border: 1px #000 solid;
-}
-table {
+table, tr, th, td {
 	border-collapse: collapse;
-}
-table, td, th {
-	border: 10px #333 solid;
-}
-td, th {
-	padding: 10px;
+	border: 1px #333 solid;
 }
 tr.header {
 	background: #333;
 	color: #fff;
 	margin-top: 20px;
-	border-top:10px #fff solid;
 }
 tr td h2 {
 	margin: 0;
