@@ -1,0 +1,28 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>Test</title>
+	<meta name="description" content="Test">
+	<meta name="author" content="DSP">
+	<script src="vue.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+	<div id="app" class="wrapper">
+		<h1>test</h1>
+		<p>The value is <span class="value">{{ counter }}</span></p>
+		<hr />
+		<p>Elapsed time: <span id="time">0</span>s</p>
+		<button id="pauseTimer">Pause</button><button id="resetTimer">Reset*</button>
+		<p><i>*Resets the timer, not the data</i></p>
+	</div>
+
+	<script src="scripts.js"></script>
+</body>
+</html>
