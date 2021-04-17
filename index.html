@@ -4,12 +4,13 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Test</title>
+	<title>Econosim</title>
 	<meta name="description" content="Test">
 	<meta name="author" content="DSP">
-	<script src="vue.js"></script>
+	<script src="js/data.js"></script>
+	<script src="js/vue2.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="css/styles.css">
 
 </head>
 
@@ -17,12 +18,52 @@
 	<div id="app" class="wrapper">
 		<h1>test</h1>
 		<p>The value is <span class="value">{{ counter }}</span></p>
-		<hr />
 		<p>Elapsed time: <span id="time">0</span>s</p>
 		<button id="pauseTimer">Pause</button><button id="resetTimer">Reset*</button>
 		<p><i>*Resets the timer, not the data</i></p>
+		<hr />
+		<!-- economy -->
+		<table>
+			<tr><td colspan="100%"><h2>Economy</h2></td></tr>
+			<tr class="header">
+				<th v-for="prop in economyData.commoditiesProps" :key="prop.index">
+					{{ prop }}
+				</th>
+			</tr>
+			<tr v-for="commodity in economyData.commodities" :key="commodity.id">
+				<td v-for="(v, k) in commodity" :key="k['id']">
+					{{ v }}
+				</td>
+			</tr>
+		</table>
+		<!-- corporations -->
+		<table>
+			<tr><td colspan="100%"><h2>Corporations</h2></td></tr>
+			<tr class="header">
+				<th v-for="prop in corporationData.corporationsProps" :key="prop.index">
+					{{ prop }}
+				</th>
+			</tr>
+			<tr v-for="corporation in corporationData.corporations" :key="corporation.id">
+				<td v-for="(v, k) in corporation" :key="k['id']">
+					{{ v }}
+				</td>
+			</tr>
+		</table>
+		<!-- factions -->
+		<table>
+			<tr><td colspan="100%"><h2>Factions</h2></td></tr>
+			<tr class="header">
+				<th v-for="prop in factionData.factionsProps" :key="prop.index">
+					{{ prop }}
+				</th>		</tr>
+			<tr v-for="faction in factionData.factions" :key="faction.id">
+				<td v-for="(v, k) in faction" :key="k['id']">
+					{{ v }}
+				</td>
+			</tr>
+		</table>
 	</div>
-
-	<script src="scripts.js"></script>
+	<script src="js/scripts.js"></script>
 </body>
 </html>

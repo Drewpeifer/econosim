@@ -82,7 +82,10 @@ $(function() {
 var app = new Vue({
 		el: '#app',
 		data: {
-			counter : 1
+			counter : 1,
+			economyData : economyData,
+			factionData : factionData,
+			corporationData : corporationData
 		},
         methods: {
 

@@ -1,0 +1,50 @@
+#app {
+	font-family: Avenir, Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-align: center;
+	color: #2c3e50;
+}
+body {
+	background: #f2f2f2;
+}
+button.paused {
+	background: yellow;
+}
+h3 {
+	margin: 40px 0 0;
+}
+ul {
+	list-style-type: none;
+	padding: 0;
+}
+li {
+	display: inline-block;
+	margin: 0 10px;
+}
+a {
+	color: #42b983;
+}
+.wrapper,
+table {
+	width: 80%;
+	margin: 20px auto;
+}
+table, tr, th, td {
+	border-collapse: collapse;
+	border: 1px #333 solid;
+}
+tr td h2 {
+	margin: 0;
+}
+tr.header {
+	background: #333;
+	color: #fff;
+	margin-top: 20px;
+}
+tr.header th {
+	border-right: #888 1px solid;
+}
+tr.header th:last-child {
+	border-right: #000 1px solid;
+}
