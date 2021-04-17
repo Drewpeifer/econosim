@@ -50,6 +50,25 @@ class Timer {
 		return this.overallTime;
 	}
 }
+function getRandomInt(min, max) {
+	// inclusive
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+function bgsBackgroundFlux(economyData) {
+	var possibleFlux = 0;
+
+	$.each(economyData.commodities, function() {
+		console.log(this.name + ' from ' + this.priceCurrent);
+		possibleFlux = this.priceBase * this.flux;
+		this.priceCurrent = getRandomInt(this.priceBase - possibleFlux, this.priceBase + possibleFlux);
+		Vue.set(this, 'priceCurrent', getRandomInt(this.priceBase - possibleFlux, this.priceBase + possibleFlux));
+		console.log('to ' + this.priceCurrent + ' ('+ possibleFlux + ')');
+	});
+
+	console.log('prices changed');
+}
 $(function() {
 		var timer = new Timer();
 		timer.start();
@@ -73,7 +92,7 @@ $(function() {
 		});
 		setInterval(() => {
 			if (timer.isRunning) {
-				app.counter++;
+				bgsBackgroundFlux(economyData);
 			}
 		}, 3000);
 	});
