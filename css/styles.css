@@ -61,3 +61,12 @@ tr.header th {
 tr.header th:last-child {
 	border-right: #000 1px solid;
 }
+td.sale {
+	background-color: lightgreen;
+}
+ul li {
+	display: block;
+}
+ul li ul li {
+	list-style-type: disc;
+}
