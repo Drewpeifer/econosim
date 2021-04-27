@@ -37,10 +37,10 @@ table {
 	vertical-align: top;
 }
 .left-col {
-	width: 60%;
+	width: 48%;
 }
 .right-col {
-	width: 35%;
+	width: 48%;
 }
 table, tr, th, td {
 	border-collapse: collapse;

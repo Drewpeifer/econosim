@@ -175,8 +175,8 @@ function createJob(i, jobList) {
 	job.id = totalJobCount;
 	job.title = "Job " + totalJobCount;
 	job.client = clients[getRandomInt(0, clients.length - 1)];
-	job.pickup = "Location #" + getRandomInt(0,100);
-	job.dropoff = "Location #" + getRandomInt(0,100);
+	job.pickup = "Loc. #" + getRandomInt(0,100);
+	job.dropoff = "Loc. #" + getRandomInt(0,100);
 	job.duration = getRandomInt(5,30);
 	job.riskLevel = getRandomInt(1,5);
 
@@ -215,8 +215,6 @@ function populateJobList(jobList) {
 }
 
 $(function() {
-	// create empty list of jobs to be populated by populateJobList
-	populateJobList(jobList);
 	// on page load, instantiate new timer
 	var timer = new Timer();
 	timer.start();
@@ -242,7 +240,10 @@ $(function() {
 	// kick timer off
 	setInterval(() => {
 		if (timer.isRunning) {
+			// fluctuate prices
 			bgsBackgroundFlux(economyData);
+			// create jobs (if needed)
+			populateJobList(jobList);
 		}
 	}, 3000);
 });
