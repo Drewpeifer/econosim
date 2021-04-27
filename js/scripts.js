@@ -53,9 +53,9 @@ class Timer {
 // provides random integer between min and max (inclusive)
 function getRandomInt(min, max) {
 	// inclusive
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 // oscillates currentPrice value within flux range based on basePrice value and random roll
 function bgsBackgroundFlux(economyData) {
@@ -76,96 +76,25 @@ function bgsBackgroundFlux(economyData) {
 // title, client, payout, cargo, destination, timeLimit
 var jobList = [],
 	jobProps = [
-		'ID',
-		'Title',
-		'Client',
-		'Pickup',
-		'Dropoff',
-		'Duration',
-		'Risk',
-		'Payout'
+	'ID',
+	'Title',
+	'Client',
+	'Pickup',
+	'Dropoff',
+	'Duration',
+	'Risk',
+	'Payout'
 	],
 	totalJobCount = 0,
-	titles = [
-		'Job 1',
-		'Job 2',
-		'Job 3',
-		'Job 4',
-		'Job 5',
-		'Job 6',
-		'Job 7',
-		'Job 8',
-		'Job 9',
-		'Job 10',
-		'Job 11',
-		'Job 12',
-		'Job 13',
-		'Job 14',
-		'Job 15',
-		'Job 16',
-		'Job 17',
-		'Job 18',
-		'Job 19',
-		'Job 20',
-	],
 	clients = [
-		'Bobs Construction',
-		'Mega Bites Burger Co.',
-		'SuperSlick Oil Filters Inc',
-		'Botanicorp Industries',
-		'MaxTrax Vinyl',
-		'Diesel Bros Auto Detailing',
-		'Quark\'s Bar',
-		'Garek\'s Simple Tailoring Service'
-	],
-	payouts = [
-		1000,
-		2000,
-		3000,
-		5000,
-		8000,
-		10000,
-		15000,
-		20000,
-		50000
-	],
-	timeLimits = [
-		1,
-		3,
-		5,
-		10,
-		20
-	],
-	destinations = [
-		'Location 1',
-		'Location 2',
-		'Location 3',
-		'Location 4',
-		'Location 5'
-	],
-	cargoTypes = [
-		'Gold',
-		'Beer',
-		'Hydrogen Energy Cells',
-		'Unrefined Dilithium',
-		'Laser Modulation Controllers',
-		'Chewing Gum'
-	],
-	cargoAmounts = [
-		1,
-		10,
-		100,
-		500,
-		1000,
-		2000,
-		5000,
-		10000
-	],
-	riskLevels = [
-		0,
-		1,
-		2,
-		3
+	'Bobs Construction',
+	'Mega Bites Burger Co.',
+	'SuperSlick Oil Filters Inc',
+	'Botanicorp Industries',
+	'MaxTrax Vinyl',
+	'Diesel Bros Auto Detailing',
+	'Quark\'s Bar',
+	'Garek\'s Simple Tailoring Service'
 	];
 // generates a single job
 function createJob(i, jobList) {
@@ -173,6 +102,7 @@ function createJob(i, jobList) {
 
 	console.log('creating job, totalJobCount = ' + totalJobCount);
 	job.id = totalJobCount;
+	totalJobCount++;// increment now so ID stays unchanged, but title gets increment
 	job.title = "Job " + totalJobCount;
 	job.client = clients[getRandomInt(0, clients.length - 1)];
 	job.pickup = "Loc. #" + getRandomInt(0,100);
@@ -181,40 +111,17 @@ function createJob(i, jobList) {
 	job.riskLevel = getRandomInt(1,5);
 
 	// calculate payout based on duration and risk level
-	console.log("calculating payout");
 	var payout = getRandomInt(1000,3000);// pick random base
-	console.log("base payout = " + payout);
+
 	payout = payout * job.riskLevel;// multiply by riskLevel
-	console.log("multiplied by riskLevel " + job.riskLevel + ", payout now = " + payout);
-	payout = Math.floor(payout + ((payout/100) * job.duration));
-	console.log("1% of payout multipled by duration (" + job.duration + ") added to previous amount, payout now = " + payout);
-
-	job.payout = payout;
-
+	payout = Math.floor(payout + ((payout/100) * job.duration));// multiply duration in mins by 1% of payout, add to total payout
+	job.payout = payout;// set payout on job
 	console.dir(job);
-	totalJobCount++;
-	jobList.push(job);
-}
-// makes sure the jobList always has 10 entries
-function populateJobList(jobList) {
-	console.log('populating job list...');
-	var jobs = jobList;
-
-	if (jobs.length < 10) {
-		console.log('WARNING: there are ' + jobs.length + ' jobs...');
-		console.log('we need more jobs!');
-		for (var i = jobs.length; jobs.length < 10; i++) {
-			console.log('generating job #' + i);
-			createJob(i, jobList);
-			console.log('pushed job! jobsList contains ' + jobList.length + ' jobs and totalJobCount = ' + totalJobCount);
-			console.dir(jobList);
-		}
-	} else {
-		console.log('Jobs list is full :)');
-	}
+	jobList.push(job);// push job to jobList
 }
 
 $(function() {
+	///////////////////////////////////////
 	// on page load, instantiate new timer
 	var timer = new Timer();
 	timer.start();
@@ -222,6 +129,7 @@ $(function() {
 		const timeInSeconds = Math.round(timer.getTime() / 1000);
 		document.getElementById('time').innerText = timeInSeconds;
 	}, 100);
+	///////////////////////////////////////
 	// bind controls
 	$('#pauseTimer').bind('click', function() {
 		let $this = $(this);
@@ -237,29 +145,49 @@ $(function() {
 	$('#resetTimer').bind('click', function() {
 		timer.reset();
 	});
+	///////////////////////////////////////
 	// kick timer off
 	setInterval(() => {
 		if (timer.isRunning) {
 			// fluctuate prices
 			bgsBackgroundFlux(economyData);
 			// create jobs (if needed)
-			populateJobList(jobList);
+			app.populateJobList(jobList);
 		}
 	}, 3000);
 });
 
-// main Vue app, wraps market component
 var app = new Vue({
-		el: '#app',
-		data: {
-			counter : 1,
-			economyData : economyData,
-			factionData : factionData,
-			corporationData : corporationData,
-			jobList : jobList,
-			jobProps : jobProps
-		},
-        methods: {
+	el: '#app',
+	data: {
+		economyData : economyData,
+		factionData : factionData,
+		corporationData : corporationData,
+		jobList : jobList,
+		jobProps : jobProps,
+		totalJobCount : totalJobCount
+	},
+	methods: {
+		populateJobList : function(jobList) {
+				// makes sure the jobList always has 10 entries
+				console.log('populating job list...');
+				var jobs = jobList;
 
-        }
-});
+				if (jobs.length < 10) {
+					console.log('WARNING: there are ' + jobs.length + ' jobs...');
+					console.log('we need more jobs!');
+					for (var i = jobs.length; jobs.length < 10; i++) {
+						console.log('generating job #' + i);
+						createJob(i, jobList);
+						console.log('pushed job! jobsList contains ' + jobList.length + ' jobs and totalJobCount = ' + totalJobCount);
+						console.dir(jobList);
+						document.getElementById('jobCount').innerText = totalJobCount;// increment the totalJob counter
+						document.getElementById('activeCount').innerText = jobList.length;// increment the active job (jobList) counter
+					}
+				} else {
+					console.log('Jobs list is full :)');
+				}
+				return totalJobCount;
+			}
+		}
+	});
