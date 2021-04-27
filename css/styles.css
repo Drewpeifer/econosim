@@ -30,6 +30,18 @@ table {
 	width: 80%;
 	margin: 20px auto;
 }
+.left-col, .right-col {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	vertical-align: top;
+}
+.left-col {
+	width: 60%;
+}
+.right-col {
+	width: 35%;
+}
 table, tr, th, td {
 	border-collapse: collapse;
 	border: 1px #333 solid;

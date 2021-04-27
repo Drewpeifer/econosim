@@ -21,48 +21,65 @@
 		<button id="pauseTimer">Pause</button><button id="resetTimer">Reset*</button>
 		<p><i>*Resets the timer, not the data</i></p>
 		<hr />
-		<!-- economy -->
-		<table>
-			<tr><td colspan="100%"><h2>Economy</h2></td></tr>
-			<tr class="header">
-				<th v-for="prop in economyData.commoditiesProps" :key="prop.index">
-					{{ prop }}
-				</th>
-			</tr>
-			<tr v-for="commodity in economyData.commodities" :key="commodity.id">
-				<td v-for="(v, k) in commodity" :key="k['id']">
-					{{ v }}
-				</td>
-			</tr>
-		</table>
-		<!-- corporations -->
-		<table>
-			<tr><td colspan="100%"><h2>Corporations</h2></td></tr>
-			<tr class="header">
-				<th v-for="prop in corporationData.corporationsProps" :key="prop.index">
-					{{ prop }}
-				</th>
-			</tr>
-			<tr v-for="corporation in corporationData.corporations" :key="corporation.id">
-				<td v-for="(v, k) in corporation" :key="k['id']">
-					{{ v }}
-				</td>
-			</tr>
-		</table>
-		<!-- factions -->
-		<table>
-			<tr><td colspan="100%"><h2>Factions</h2></td></tr>
-			<tr class="header">
-				<th v-for="prop in factionData.factionsProps" :key="prop.index">
-					{{ prop }}
-				</th>		</tr>
-			<tr v-for="faction in factionData.factions" :key="faction.id">
-				<td v-for="(v, k) in faction" :key="k['id']">
-					{{ v }}
-				</td>
-			</tr>
-		</table>
-	</div>
-	<script src="js/scripts.js"></script>
-</body>
-</html>
+		<div class="left-col">
+			<!-- economy -->
+			<table>
+				<tr><td colspan="100%"><h2>Economy</h2></td></tr>
+				<tr class="header">
+					<th v-for="prop in economyData.commoditiesProps" :key="prop.index">
+						{{ prop }}
+					</th>
+				</tr>
+				<tr v-for="commodity in economyData.commodities" :key="commodity.id">
+					<td v-for="(v, k) in commodity" :key="k['id']">
+						{{ v }}
+					</td>
+				</tr>
+			</table>
+			<!-- corporations -->
+			<table>
+				<tr><td colspan="100%"><h2>Corporations</h2></td></tr>
+				<tr class="header">
+					<th v-for="prop in corporationData.corporationsProps" :key="prop.index">
+						{{ prop }}
+					</th>
+				</tr>
+				<tr v-for="corporation in corporationData.corporations" :key="corporation.id">
+					<td v-for="(v, k) in corporation" :key="k['id']">
+						{{ v }}
+					</td>
+				</tr>
+			</table>
+			<!-- factions -->
+			<table>
+				<tr><td colspan="100%"><h2>Factions</h2></td></tr>
+				<tr class="header">
+					<th v-for="prop in factionData.factionsProps" :key="prop.index">
+						{{ prop }}
+					</th>		</tr>
+					<tr v-for="faction in factionData.factions" :key="faction.id">
+						<td v-for="(v, k) in faction" :key="k['id']">
+							{{ v }}
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="right-col">
+			<!-- jobs -->
+			<table>
+				<tr><td colspan="100%"><h2>Jobs</h2></td></tr>
+				<tr class="header">
+					<th v-for="prop in jobProps" :key="prop.index">
+						{{ prop }}
+					</th>		</tr>
+					<tr v-for="job in jobList" :key="job.id">
+						<td v-for="(v, k) in job" :key="k['id']">
+							{{ v }}
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<script src="js/scripts.js"></script>
+	</body>
+	</html>

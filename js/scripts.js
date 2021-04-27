@@ -74,7 +74,13 @@ function bgsBackgroundFlux(economyData) {
 // jobData
 // each job will have the following attributes:
 // title, client, payout, cargo, destination, timeLimit
-var totalJobCount = 0,
+var jobList = [],
+	jobProps = [
+		'ID',
+		'Title',
+		'Client'
+	],
+	totalJobCount = 0,
 	titles = [
 		'Job 1',
 		'Job 2',
@@ -161,6 +167,7 @@ function createJob(i, jobList) {
 	var job = {};
 
 	console.log('creating job, totalJobCount = ' + totalJobCount);
+	job.id = totalJobCount;
 	job.title = "Job " + totalJobCount;
 	job.client = clients[getRandomInt(0, clients.length - 1)];
 	console.dir(job);
@@ -188,7 +195,6 @@ function populateJobList(jobList) {
 
 $(function() {
 	// create empty list of jobs to be populated by populateJobList
-	var jobList = [];
 	populateJobList(jobList);
 	// on page load, instantiate new timer
 	var timer = new Timer();
@@ -227,7 +233,9 @@ var app = new Vue({
 			counter : 1,
 			economyData : economyData,
 			factionData : factionData,
-			corporationData : corporationData
+			corporationData : corporationData,
+			jobList : jobList,
+			jobProps : jobProps
 		},
         methods: {
 
