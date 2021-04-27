@@ -1,5 +1,23 @@
-//////////////
-// Page load, counter start, BGS binding
+////////////////////////////////////////////////
+// custom log b/c windows dev tools suck
+function expandedLog(item, maxDepth = 100, depth = 0){
+    if (depth > maxDepth ) {
+        console.log(item);
+        return;
+    }
+    if (typeof item === 'object' && item !== null) {
+        Object.entries(item).forEach(([key, value]) => {
+            console.group(key + ' : ' +(typeof value));
+            expandedLog(value, maxDepth, depth + 1);
+            console.groupEnd();
+        });
+    } else {
+        console.log(item);
+    }
+}
+
+////////////////
+// define timer
 class Timer {
 	// shamlessly ripped from https://stackoverflow.com/a/57981688/2302770
 	constructor () {
@@ -75,6 +93,7 @@ function bgsBackgroundFlux(economyData) {
 // each job will have the following attributes:
 // title, client, payout, cargo, destination, timeLimit
 var jobList = [],
+	activeJobList = [],
 	jobProps = [
 	'ID',
 	'Title',
@@ -83,6 +102,8 @@ var jobList = [],
 	'Dropoff',
 	'Duration',
 	'Risk',
+	'Active',
+	'Owner',
 	'Payout'
 	],
 	totalJobCount = 0,
@@ -109,6 +130,8 @@ function createJob(i, jobList) {
 	job.dropoff = "Loc. #" + getRandomInt(0,100);
 	job.duration = getRandomInt(5,30);
 	job.riskLevel = getRandomInt(1,5);
+	job.active = false;
+	job.owner = '';
 
 	// calculate payout based on duration and risk level
 	var payout = getRandomInt(1000,3000);// pick random base
@@ -171,6 +194,7 @@ var app = new Vue({
 		factionData : factionData,
 		corporationData : corporationData,
 		jobList : jobList,
+		activeJobList : activeJobList,
 		jobProps : jobProps,
 		totalJobCount : totalJobCount
 	},
@@ -206,6 +230,17 @@ var app = new Vue({
 
 			console.dir(this.corporationData.corporations);
 			console.dir(shuffledCorps);
+			console.dir(jobList);
+			$.each(shuffledCorps, function(i, v) {
+				console.log(v);
+				var selectedJob = jobList[getRandomInt(0,jobList.length-1)];
+				selectedJob.active = true;
+				selectedJob.owner = v.name;
+
+				jobList.splice( $.inArray(selectedJob, jobList), 1 );
+				activeJobList.push(selectedJob);
+			});
+			document.getElementById('activeCount').innerText = activeJobList.length;
 		}
 	}
 });
