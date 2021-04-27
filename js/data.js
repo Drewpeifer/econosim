@@ -99,7 +99,7 @@ var economyData = {
 				jobsAvailable : 0,
 				jobsActive : 0,
 				jobsCompleted : 0,
-				driversCount : 200,
+				driversCount : 5,
 				driversActive : 0
 			},
 			{
@@ -110,7 +110,7 @@ var economyData = {
 				jobsAvailable : 0,
 				jobsActive : 0,
 				jobsCompleted : 0,
-				driversCount : 100,
+				driversCount : 4,
 				driversActive : 0
 			},
 			{
@@ -121,7 +121,7 @@ var economyData = {
 				jobsAvailable : 0,
 				jobsActive : 0,
 				jobsCompleted : 0,
-				driversCount : 150,
+				driversCount : 3,
 				driversActive : 0
 			},
 			{
@@ -132,7 +132,7 @@ var economyData = {
 				jobsAvailable : 0,
 				jobsActive : 0,
 				jobsCompleted : 0,
-				driversCount : 125,
+				driversCount : 4,
 				driversActive : 0
 			}
 		],

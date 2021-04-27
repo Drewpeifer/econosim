@@ -153,8 +153,15 @@ $(function() {
 			bgsBackgroundFlux(economyData);
 			// create jobs (if needed)
 			app.populateJobList(jobList);
+
 		}
 	}, 3000);
+	setInterval(() => {
+		if (timer.isRunning) {
+			// distribute jobs
+			app.bgsJobDistribution();
+		}
+	}, 5000);
 });
 
 var app = new Vue({
@@ -169,25 +176,36 @@ var app = new Vue({
 	},
 	methods: {
 		populateJobList : function(jobList) {
-				// makes sure the jobList always has 10 entries
-				console.log('populating job list...');
-				var jobs = jobList;
+			// makes sure the jobList always has 10 entries
+			console.log('populating job list...');
+			var jobs = jobList;
 
-				if (jobs.length < 10) {
-					console.log('WARNING: there are ' + jobs.length + ' jobs...');
-					console.log('we need more jobs!');
-					for (var i = jobs.length; jobs.length < 10; i++) {
-						console.log('generating job #' + i);
-						createJob(i, jobList);
-						console.log('pushed job! jobsList contains ' + jobList.length + ' jobs and totalJobCount = ' + totalJobCount);
-						console.dir(jobList);
-						document.getElementById('jobCount').innerText = totalJobCount;// increment the totalJob counter
-						document.getElementById('activeCount').innerText = jobList.length;// increment the active job (jobList) counter
-					}
-				} else {
-					console.log('Jobs list is full :)');
+			if (jobs.length < 10) {
+				console.log('WARNING: there are ' + jobs.length + ' jobs...');
+				console.log('we need more jobs!');
+				for (var i = jobs.length; jobs.length < 10; i++) {
+					console.log('generating job #' + i);
+					createJob(i, jobList);
+					console.log('pushed job! jobsList contains ' + jobList.length + ' jobs and totalJobCount = ' + totalJobCount);
+					console.dir(jobList);
+					document.getElementById('jobCount').innerText = totalJobCount;// increment the totalJob counter
+					document.getElementById('availableCount').innerText = jobList.length;// increment the active job (jobList) counter
 				}
-				return totalJobCount;
+			} else {
+				console.log('Jobs list is full :)');
 			}
+			return totalJobCount;
+		},
+		bgsJobDistribution : function() {
+			console.log('distributing available jobs...');
+
+			var shuffledCorps = this.corporationData.corporations
+				.map((a) => ({sort: Math.random(), value: a}))
+				.sort((a, b) => a.sort - b.sort)
+				.map((a) => a.value);
+
+			console.dir(this.corporationData.corporations);
+			console.dir(shuffledCorps);
 		}
-	});
+	}
+});
