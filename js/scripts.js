@@ -151,8 +151,8 @@ function createJob(i, jobList) {
 $(function() {
 	///////////////////////////////////////
 	// on page load, instantiate new timer
-	var timer = new Timer();
-	timer.start();
+	window.timer = new Timer();
+	window.timer.start();
 	setInterval(() => {
 		const timeInSeconds = Math.round(timer.getTime() / 1000);
 		document.getElementById('time').innerText = timeInSeconds;
@@ -163,20 +163,20 @@ $(function() {
 		let $this = $(this);
 
 		if ($this.hasClass('paused')) {
-			timer.start();
+			window.timer.start();
 			$this.removeClass('paused');
 		} else {
-			timer.stop();
+			window.timer.stop();
 			$this.addClass('paused');
 		}
 	});
 	$('#resetTimer').bind('click', function() {
-		timer.reset();
+		window.timer.reset();
 	});
 	///////////////////////////////////////
 	// kick timer off
 	setInterval(() => {
-		if (timer.isRunning) {
+		if (window.timer.isRunning) {
 			// fluctuate prices
 			bgsBackgroundFlux(economyData);
 			// create jobs (if needed)
@@ -185,7 +185,7 @@ $(function() {
 		}
 	}, 3000);
 	setInterval(() => {
-		if (timer.isRunning) {
+		if (window.timer.isRunning) {
 			// distribute jobs
 			app.bgsJobDistribution();
 		}
@@ -202,7 +202,8 @@ var app = new Vue({
 		activeJobList : activeJobList,
 		archivedJobList : archivedJobList,
 		jobProps : jobProps,
-		totalJobCount : totalJobCount
+		totalJobCount : totalJobCount,
+		timer : window.timer
 	},
 	methods: {
 		populateJobList : function(jobList) {
@@ -255,8 +256,10 @@ var app = new Vue({
 					v.jobsActive++;
 					// set a timer for the job to complete
 					setInterval(() => {
-						// complete job
-						app.bgsJobCompletion(selectedJob);
+						if (window.timer.isRunning) {
+							// complete job
+							app.bgsJobCompletion(selectedJob);
+						}
 					}, selectedJob.duration * 1000);
 
 					jobList.splice( $.inArray(selectedJob, jobList), 1 );
@@ -266,6 +269,11 @@ var app = new Vue({
 			document.getElementById('activeCount').innerText = activeJobList.length;
 		},
 		bgsJobCompletion : function(job) {
+			// unknown bug is causing duplicates to be pushed to archiveList,
+			// trying to subvert here...
+			if (job.completed) {
+				return;
+			}
 			// risk levels are 0-5, so we get a random number between 1 and 10
 			// and see if that number is higher than the risk level. this means
 			// that risk level 5 = ~55% chance of success (we exclude 0)
