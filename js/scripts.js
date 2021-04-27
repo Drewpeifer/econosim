@@ -78,7 +78,12 @@ var jobList = [],
 	jobProps = [
 		'ID',
 		'Title',
-		'Client'
+		'Client',
+		'Pickup',
+		'Dropoff',
+		'Duration',
+		'Risk',
+		'Payout'
 	],
 	totalJobCount = 0,
 	titles = [
@@ -170,6 +175,22 @@ function createJob(i, jobList) {
 	job.id = totalJobCount;
 	job.title = "Job " + totalJobCount;
 	job.client = clients[getRandomInt(0, clients.length - 1)];
+	job.pickup = "Location #" + getRandomInt(0,100);
+	job.dropoff = "Location #" + getRandomInt(0,100);
+	job.duration = getRandomInt(5,30);
+	job.riskLevel = getRandomInt(1,5);
+
+	// calculate payout based on duration and risk level
+	console.log("calculating payout");
+	var payout = getRandomInt(1000,3000);// pick random base
+	console.log("base payout = " + payout);
+	payout = payout * job.riskLevel;// multiply by riskLevel
+	console.log("multiplied by riskLevel " + job.riskLevel + ", payout now = " + payout);
+	payout = Math.floor(payout + ((payout/100) * job.duration));
+	console.log("1% of payout multipled by duration (" + job.duration + ") added to previous amount, payout now = " + payout);
+
+	job.payout = payout;
+
 	console.dir(job);
 	totalJobCount++;
 	jobList.push(job);
