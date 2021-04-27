@@ -183,7 +183,7 @@ $(function() {
 			app.populateJobList(jobList);
 
 		}
-	}, 3000);
+	}, 10000);
 	setInterval(() => {
 		if (window.timer.isRunning) {
 			// distribute jobs
@@ -267,6 +267,8 @@ var app = new Vue({
 				}
 			});
 			document.getElementById('activeCount').innerText = activeJobList.length;
+			document.getElementById('availableCount').innerText = jobList.length;// increment the active job (jobList) counter
+
 		},
 		bgsJobCompletion : function(job) {
 			// unknown bug is causing duplicates to be pushed to archiveList,

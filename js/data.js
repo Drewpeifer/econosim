@@ -105,7 +105,7 @@ var economyData = {
 			{
 				id : 1,
 				name : 'CombatCorp',
-				balance: 40000,
+				balance: 50000,
 				focus : 'combat',
 				jobsAvailable : 0,
 				jobsActive : 0,
@@ -116,7 +116,7 @@ var economyData = {
 			{
 				id : 2,
 				name : 'ManageCorp',
-				balance: 70000,
+				balance: 50000,
 				focus : 'management',
 				jobsAvailable : 0,
 				jobsActive : 0,
@@ -127,7 +127,7 @@ var economyData = {
 			{
 				id : 3,
 				name : 'IndyCorp',
-				balance: 60000,
+				balance: 50000,
 				focus : 'none',
 				jobsAvailable : 0,
 				jobsActive : 0,

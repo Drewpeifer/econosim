@@ -19,6 +19,19 @@
 		<h1>EconoSim</h1>
 		<p>Elapsed time: <span id="time">0</span>s</p>
 		<button id="pauseTimer">Pause</button><button id="resetTimer">Reset*</button>
+		<ul>
+			<li><b>Every 5 seconds:</b>
+				<ul>
+					<li>Corporations select 1 job (if they have a driver available)</li>
+				</ul>
+			</li>
+			<li><b>Every 10 seconds:</b>
+				<ul>
+					<li>Commodity prices fluctuate (sales = green)</li>
+					<li>List of available jobs is populated / topped off (10 max)</li>
+				</ul>
+			</li>
+		</ul>
 		<p><i>*Resets the timer, not the data</i></p>
 		<hr />
 		<div class="left-col">
@@ -26,14 +39,28 @@
 			<table>
 				<tr><td colspan="100%"><h2>Economy</h2></td></tr>
 				<tr class="header">
-					<th v-for="prop in economyData.commoditiesProps" :key="prop.index">
+					<th>ID</th>
+					<th>Name</th>
+					<th>Nice Name</th>
+					<th>Base Price</th>
+					<th>Current Price</th>
+					<th>Flux</th>
+					<th>Unit Size</th>
+<!-- 					<th v-for="prop in economyData.commoditiesProps" :key="prop.index">
 						{{ prop }}
-					</th>
+					</th> -->
 				</tr>
 				<tr v-for="commodity in economyData.commodities" :key="commodity.id">
-					<td v-for="(v, k) in commodity" :key="k['id']">
+					<td>{{ commodity.id }}</td>
+					<td>{{ commodity.name }}</td>
+					<td>{{ commodity.niceName }}</td>
+					<td>{{ commodity.priceBase }}</td>
+					<td v-bind:class="{ sale: commodity.priceCurrent < commodity.priceBase }">{{ commodity.priceCurrent }}</td>
+					<td>{{ commodity.flux }}</td>
+					<td>{{ commodity.unitSize }}</td>
+<!-- 					<td v-for="(v, k) in commodity" :key="k['id']">
 						{{ v }}
-					</td>
+					</td> -->
 				</tr>
 			</table>
 			<!-- corporations -->
