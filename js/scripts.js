@@ -94,6 +94,7 @@ function bgsBackgroundFlux(economyData) {
 // title, client, payout, cargo, destination, timeLimit
 var jobList = [],
 	activeJobList = [],
+	archivedJobList = [],
 	jobProps = [
 	'ID',
 	'Title',
@@ -104,6 +105,8 @@ var jobList = [],
 	'Risk',
 	'Active',
 	'Owner',
+	'Completed',
+	'Passed',
 	'Payout'
 	],
 	totalJobCount = 0,
@@ -132,6 +135,8 @@ function createJob(i, jobList) {
 	job.riskLevel = getRandomInt(1,5);
 	job.active = false;
 	job.owner = '';
+	job.completed = false;
+	job.passed = false;
 
 	// calculate payout based on duration and risk level
 	var payout = getRandomInt(1000,3000);// pick random base
@@ -195,6 +200,7 @@ var app = new Vue({
 		corporationData : corporationData,
 		jobList : jobList,
 		activeJobList : activeJobList,
+		archivedJobList : archivedJobList,
 		jobProps : jobProps,
 		totalJobCount : totalJobCount
 	},
@@ -232,15 +238,73 @@ var app = new Vue({
 			console.dir(shuffledCorps);
 			console.dir(jobList);
 			$.each(shuffledCorps, function(i, v) {
-				console.log(v);
-				var selectedJob = jobList[getRandomInt(0,jobList.length-1)];
-				selectedJob.active = true;
-				selectedJob.owner = v.name;
+				console.dir(v);
+				if (v.driversCount === 0) {
+					// if there are no available drivers, skip this turn
+					return;
+				} else {
+					// select a random job from the available list
+					var selectedJob = jobList[getRandomInt(0,jobList.length-1)];
+					// activate that job
+					selectedJob.active = true;
+					// set ownership of job
+					selectedJob.owner = v.name;
+					// modify relevant quantities
+					v.driversCount--;
+					v.driversActive++;
+					v.jobsActive++;
+					// set a timer for the job to complete
+					setInterval(() => {
+						// complete job
+						app.bgsJobCompletion(selectedJob);
+					}, selectedJob.duration * 1000);
 
-				jobList.splice( $.inArray(selectedJob, jobList), 1 );
-				activeJobList.push(selectedJob);
+					jobList.splice( $.inArray(selectedJob, jobList), 1 );
+					activeJobList.push(selectedJob);
+				}
 			});
 			document.getElementById('activeCount').innerText = activeJobList.length;
+		},
+		bgsJobCompletion : function(job) {
+			// risk levels are 0-5, so we get a random number between 1 and 10
+			// and see if that number is higher than the risk level. this means
+			// that risk level 5 = ~55% chance of success (we exclude 0)
+			var risk = job.riskLevel,
+				chance = getRandomInt(1,10),
+				owner = this.corporationData.corporations.find(item => item.name === job.owner);
+
+			// calculate pass/fail
+			if (chance >= risk) {
+				// pass!
+				// register completion with job
+				console.log('job passed!');
+				job.completed = true;
+				job.passed = true;
+				activeJobList.splice( $.inArray(job, activeJobList), 1 );
+				archivedJobList.push(job);
+				console.log('archived job...');
+				document.getElementById('archivedCount').innerText = archivedJobList.length;
+				// register completion with company
+				owner.driversCount++;
+				owner.driversActive--;
+				owner.jobsActive--;
+				owner.jobsCompleted++;
+				owner.balance = owner.balance + job.payout;
+			} else {
+				// failed!
+				// register completion with job
+				console.log('job failed!');
+				job.completed = true;
+				job.passed = false;
+				activeJobList.splice( $.inArray(job, activeJobList), 1 );
+				archivedJobList.push(job);
+				console.log('archived job...');
+				document.getElementById('archivedCount').innerText = archivedJobList.length;
+				// register completion with company
+				owner.driversCount++;
+				owner.driversActive--;
+				owner.jobsActive--;
+			}
 		}
 	}
 });

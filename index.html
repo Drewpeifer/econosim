@@ -85,7 +85,7 @@
 			<!-- active jobs -->
 			<table>
 				<tr>
-					<td colspan="100%"><h2>Active Jobs (Active = <span id="activeCount">0</span>)</h2></td>
+					<td colspan="100%"><h2>Active Jobs (<span id="activeCount">0</span>)</h2></td>
 				</tr>
 				<tr class="header">
 					<th v-for="prop in jobProps" :key="prop.index">
@@ -93,6 +93,22 @@
 					</th>
 				</tr>
 				<tr v-for="job in activeJobList" :key="job.id">
+					<td v-for="(v, k) in job" :key="k['id']">
+						{{ v }}
+					</td>
+				</tr>
+			</table>
+			<!-- archived jobs -->
+			<table>
+				<tr>
+					<td colspan="100%"><h2>Archived Jobs (<span id="archivedCount">0</span>)</h2></td>
+				</tr>
+				<tr class="header">
+					<th v-for="prop in jobProps" :key="prop.index">
+						{{ prop }}
+					</th>
+				</tr>
+				<tr v-for="job in archivedJobList" :key="job.id">
 					<td v-for="(v, k) in job" :key="k['id']">
 						{{ v }}
 					</td>
