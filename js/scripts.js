@@ -157,38 +157,39 @@ var totalJobCount = 0,
 		3
 	];
 // generates a single job
-function createJob(i, totalJobCount) {
+function createJob(i, jobList) {
 	var job = {};
 
 	console.log('creating job, totalJobCount = ' + totalJobCount);
-	totalJobCount++;
 	job.title = "Job " + totalJobCount;
 	job.client = clients[getRandomInt(0, clients.length - 1)];
 	console.dir(job);
-	console.log('created job, totalJobCount now = ' + totalJobCount);
-	return job, totalJobCount;
+	totalJobCount++;
+	jobList.push(job);
 }
 // makes sure the jobList always has 10 entries
-function populateJobList(jobList, jobCount) {
+function populateJobList(jobList) {
 	console.log('populating job list...');
 	var jobs = jobList;
 
-	console.log('there are ' + jobs.length + ' jobs...');
 	if (jobs.length < 10) {
-		console.log('need more!');
-		for (var i = 0; i < (10 - jobs.length); i++) {
-			console.log('generating job...');
-			console.log(i);
-			jobList.push(createJob(i, totalJobCount));
-			console.log(totalJobCount);
+		console.log('WARNING: there are ' + jobs.length + ' jobs...');
+		console.log('we need more jobs!');
+		for (var i = jobs.length; i < (10 - jobs.length); i++) {
+			console.log('generating job #' + i);
+			createJob(i, jobList);
+			console.log('pushed job! totalJobCount = ' + totalJobCount);
+			console.dir(jobList);
 		}
+	} else {
+		console.log('Jobs list is full :)');
 	}
 }
 
 $(function() {
 	// create empty list of jobs to be populated by populateJobList
 	var jobList = [];
-	populateJobList(jobList, totalJobCount);
+	populateJobList(jobList);
 	// on page load, instantiate new timer
 	var timer = new Timer();
 	timer.start();
