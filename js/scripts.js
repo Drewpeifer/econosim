@@ -175,10 +175,10 @@ function populateJobList(jobList) {
 	if (jobs.length < 10) {
 		console.log('WARNING: there are ' + jobs.length + ' jobs...');
 		console.log('we need more jobs!');
-		for (var i = jobs.length; i < (10 - jobs.length); i++) {
+		for (var i = jobs.length; jobs.length < 10; i++) {
 			console.log('generating job #' + i);
 			createJob(i, jobList);
-			console.log('pushed job! totalJobCount = ' + totalJobCount);
+			console.log('pushed job! jobsList contains ' + jobList.length + ' jobs and totalJobCount = ' + totalJobCount);
 			console.dir(jobList);
 		}
 	} else {
