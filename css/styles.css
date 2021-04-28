@@ -61,10 +61,13 @@ tr.header th {
 tr.header th:last-child {
 	border-right: #000 1px solid;
 }
-td.sale {
+.sale, .pass {
 	background-color: lightgreen;
 }
-td.leader {
+.hike, .fail {
+	background-color: lightpink;
+}
+.leader {
 	background-color: green;
 	color: white;
 	font-weight: bold;

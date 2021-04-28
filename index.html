@@ -117,14 +117,38 @@
 					<td colspan="100%"><h2>Jobs (Available = <span id="availableCount">0</span>, Total = <span id="jobCount">0</span>)</h2></td>
 				</tr>
 				<tr class="header">
-					<th v-for="prop in jobProps" :key="prop.index">
+					<th>ID</th>
+					<th>Title</th>
+					<th>Client</th>
+					<th>Pickup</th>
+					<th>Dropoff</th>
+					<th>Duration</th>
+					<th>Risk</th>
+					<th>Active</th>
+					<th>Owner</th>
+					<th>Completed</th>
+					<th>Passed</th>
+					<th>Payout</th>
+<!-- 					<th v-for="prop in jobProps" :key="prop.index">
 						{{ prop }}
-					</th>
+					</th> -->
 				</tr>
 				<tr v-for="job in jobList" :key="job.id">
-					<td v-for="(v, k) in job" :key="k['id']">
+					<td>{{ job.id }}</td>
+					<td>{{ job.title }}</td>
+					<td>{{ job.client }}</td>
+					<td>{{ job.pickup }}</td>
+					<td>{{ job.dropoff }}</td>
+					<td>{{ job.duration }}</td>
+					<td>{{ job.riskLevel }}</td>
+					<td>{{ job.active }}</td>
+					<td>{{ job.owner }}</td>
+					<td>{{ job.completed }}</td>
+					<td>{{ job.passed }}</td>
+					<td>{{ job.payout }}</td>
+<!-- 					<td v-for="(v, k) in job" :key="k['id']">
 						{{ v }}
-					</td>
+					</td> -->
 				</tr>
 			</table>
 			<!-- active jobs -->
@@ -133,14 +157,38 @@
 					<td colspan="100%"><h2>Active Jobs (<span id="activeCount">0</span>)</h2></td>
 				</tr>
 				<tr class="header">
-					<th v-for="prop in jobProps" :key="prop.index">
+					<th>ID</th>
+					<th>Title</th>
+					<th>Client</th>
+					<th>Pickup</th>
+					<th>Dropoff</th>
+					<th>Duration</th>
+					<th>Risk</th>
+					<th>Active</th>
+					<th>Owner</th>
+					<th>Completed</th>
+					<th>Passed</th>
+					<th>Payout</th>
+<!-- 					<th v-for="prop in jobProps" :key="prop.index">
 						{{ prop }}
-					</th>
+					</th> -->
 				</tr>
 				<tr v-for="job in activeJobList" :key="job.id">
-					<td v-for="(v, k) in job" :key="k['id']">
+					<td>{{ job.id }}</td>
+					<td>{{ job.title }}</td>
+					<td>{{ job.client }}</td>
+					<td>{{ job.pickup }}</td>
+					<td>{{ job.dropoff }}</td>
+					<td>{{ job.duration }}</td>
+					<td>{{ job.riskLevel }}</td>
+					<td>{{ job.active }}</td>
+					<td>{{ job.owner }}</td>
+					<td>{{ job.completed }}</td>
+					<td>{{ job.passed }}</td>
+					<td>{{ job.payout }}</td>
+<!-- 					<td v-for="(v, k) in job" :key="k['id']">
 						{{ v }}
-					</td>
+					</td> -->
 				</tr>
 			</table>
 			<!-- archived jobs -->
@@ -149,14 +197,38 @@
 					<td colspan="100%"><h2>Archived Jobs (<span id="archivedCount">0</span>)</h2></td>
 				</tr>
 				<tr class="header">
-					<th v-for="prop in jobProps" :key="prop.index">
+					<th>ID</th>
+					<th>Title</th>
+					<th>Client</th>
+					<th>Pickup</th>
+					<th>Dropoff</th>
+					<th>Duration</th>
+					<th>Risk</th>
+					<th>Active</th>
+					<th>Owner</th>
+					<th>Completed</th>
+					<th>Passed</th>
+					<th>Payout</th>
+<!-- 					<th v-for="prop in jobProps" :key="prop.index">
 						{{ prop }}
-					</th>
+					</th> -->
 				</tr>
 				<tr v-for="job in archivedJobList" :key="job.id">
-					<td v-for="(v, k) in job" :key="k['id']">
+					<td>{{ job.id }}</td>
+					<td>{{ job.title }}</td>
+					<td>{{ job.client }}</td>
+					<td>{{ job.pickup }}</td>
+					<td>{{ job.dropoff }}</td>
+					<td>{{ job.duration }}</td>
+					<td>{{ job.riskLevel }}</td>
+					<td>{{ job.active }}</td>
+					<td>{{ job.owner }}</td>
+					<td>{{ job.completed }}</td>
+					<td>{{ job.passed }}</td>
+					<td>{{ job.payout }}</td>
+<!-- 					<td v-for="(v, k) in job" :key="k['id']">
 						{{ v }}
-					</td>
+					</td> -->
 				</tr>
 			</table>
 		</div>
