@@ -178,13 +178,13 @@ $(function() {
 			app.populateJobList(jobList);
 
 		}
-	}, 10000);
+	}, 5000);
 	setInterval(() => {
 		if (window.timer.isRunning) {
 			// distribute jobs
 			app.bgsJobDistribution();
 		}
-	}, 5000);
+	}, 6000);
 	setInterval(() => {
 		if (window.timer.isRunning) {
 			// flag stats
