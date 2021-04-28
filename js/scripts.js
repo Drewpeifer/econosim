@@ -71,17 +71,18 @@ function bgsBackgroundFlux(economyData) {
 
 	console.log('prices changed');
 }
-// flag the corp with the highest balance
-function flagHighestBalance() {
-	var maxBalanceCorp = corporationData.corporations.reduce((max, corp) => max.balance > corp.balance ? max : corp);
+// flag the object with the highest value for a prop given
+// the prop, the flag prop (what to set to "true"), and the array of objects
+function flagHighestProp(prop, flagProp, array) {
+	var leader = array.reduce((max, obj) => max[prop] > obj[prop] ? max : obj);
 
-	$.each(corporationData.corporations, function() {
-		this.highestBalance = false;
+	$.each(array, function() {
+		this[flagProp] = false;
 	});
-	maxBalanceCorp.highestBalance = true;
+	leader[flagProp] = true;
 
-	console.log('flagging highest balance...');
-	console.dir(maxBalanceCorp);
+	console.log('flagging highest ' + prop + '...');
+	console.dir(leader);
 }
 // jobData
 // each job will have the following attributes:
@@ -184,6 +185,12 @@ $(function() {
 			app.bgsJobDistribution();
 		}
 	}, 5000);
+	setInterval(() => {
+		if (window.timer.isRunning) {
+			// flag stats
+			flagHighestProp('balance', 'highestBalance', corporationData.corporations);
+		}
+	}, 1000);
 });
 
 var app = new Vue({
@@ -309,7 +316,7 @@ var app = new Vue({
 				owner.driversActive--;
 				owner.jobsActive--;
 			}
-			flagHighestBalance();
+			//flagHighestProp('balance', 'highestBalance', corporationData.corporations);
 		}
 	}
 });
