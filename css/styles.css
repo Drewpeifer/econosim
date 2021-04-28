@@ -64,6 +64,11 @@ tr.header th:last-child {
 td.sale {
 	background-color: lightgreen;
 }
+td.leader {
+	background-color: green;
+	color: white;
+	font-weight: bold;
+}
 ul li {
 	display: block;
 }

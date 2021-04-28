@@ -71,6 +71,18 @@ function bgsBackgroundFlux(economyData) {
 
 	console.log('prices changed');
 }
+// flag the corp with the highest balance
+function flagHighestBalance() {
+	var maxBalanceCorp = corporationData.corporations.reduce((max, corp) => max.balance > corp.balance ? max : corp);
+
+	$.each(corporationData.corporations, function() {
+		this.highestBalance = false;
+	});
+	maxBalanceCorp.highestBalance = true;
+
+	console.log('flagging highest balance...');
+	console.dir(maxBalanceCorp);
+}
 // jobData
 // each job will have the following attributes:
 // title, client, payout, cargo, destination, timeLimit
@@ -297,6 +309,7 @@ var app = new Vue({
 				owner.driversActive--;
 				owner.jobsActive--;
 			}
+			flagHighestBalance();
 		}
 	}
 });

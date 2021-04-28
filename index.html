@@ -83,7 +83,7 @@
 				<tr v-for="corporation in corporationData.corporations" :key="corporation.id">
 					<td>{{ corporation.id }}</td>
 					<td>{{ corporation.name }}</td>
-					<td>{{ corporation.balance }}</td>
+					<td v-bind:class="{ leader: corporation.highestBalance }">{{ corporation.balance }}</td>
 					<td>{{ corporation.focus }}</td>
 					<td>{{ corporation.jobsAvailable }}</td>
 					<td>{{ corporation.jobsActive }}</td>

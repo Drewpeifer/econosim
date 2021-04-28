@@ -100,7 +100,8 @@ var economyData = {
 				jobsActive : 0,
 				jobsCompleted : 0,
 				driversCount : 5,
-				driversActive : 0
+				driversActive : 0,
+				highestBalance : false
 			},
 			{
 				id : 1,
@@ -111,7 +112,8 @@ var economyData = {
 				jobsActive : 0,
 				jobsCompleted : 0,
 				driversCount : 4,
-				driversActive : 0
+				driversActive : 0,
+				highestBalance : false
 			},
 			{
 				id : 2,
@@ -122,7 +124,8 @@ var economyData = {
 				jobsActive : 0,
 				jobsCompleted : 0,
 				driversCount : 3,
-				driversActive : 0
+				driversActive : 0,
+				highestBalance : false
 			},
 			{
 				id : 3,
@@ -133,7 +136,8 @@ var economyData = {
 				jobsActive : 0,
 				jobsCompleted : 0,
 				driversCount : 4,
-				driversActive : 0
+				driversActive : 0,
+				highestBalance : false
 			}
 		],
 	};
