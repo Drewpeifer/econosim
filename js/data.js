@@ -98,7 +98,8 @@ var economyData = {
 				focus : 'driving',
 				jobsAvailable : 0,
 				jobsActive : 0,
-				jobsCompleted : 0,
+				jobsPassed : 0,
+				jobsFailed : 0,
 				driversCount : 5,
 				driversActive : 0,
 				highestBalance : false
@@ -110,7 +111,8 @@ var economyData = {
 				focus : 'combat',
 				jobsAvailable : 0,
 				jobsActive : 0,
-				jobsCompleted : 0,
+				jobsPassed : 0,
+				jobsFailed : 0,
 				driversCount : 4,
 				driversActive : 0,
 				highestBalance : false
@@ -122,7 +124,8 @@ var economyData = {
 				focus : 'management',
 				jobsAvailable : 0,
 				jobsActive : 0,
-				jobsCompleted : 0,
+				jobsPassed : 0,
+				jobsFailed : 0,
 				driversCount : 3,
 				driversActive : 0,
 				highestBalance : false
@@ -134,7 +137,8 @@ var economyData = {
 				focus : 'none',
 				jobsAvailable : 0,
 				jobsActive : 0,
-				jobsCompleted : 0,
+				jobsPassed : 0,
+				jobsFailed : 0,
 				driversCount : 4,
 				driversActive : 0,
 				highestBalance : false

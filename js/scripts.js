@@ -299,7 +299,7 @@ var app = new Vue({
 				owner.driversCount++;
 				owner.driversActive--;
 				owner.jobsActive--;
-				owner.jobsCompleted++;
+				owner.jobsPassed++;
 				owner.balance = owner.balance + job.payout;
 			} else {
 				// failed!
@@ -315,8 +315,8 @@ var app = new Vue({
 				owner.driversCount++;
 				owner.driversActive--;
 				owner.jobsActive--;
+				owner.jobsFailed++;
 			}
-			//flagHighestProp('balance', 'highestBalance', corporationData.corporations);
 		}
 	}
 });
