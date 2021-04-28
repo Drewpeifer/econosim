@@ -67,14 +67,32 @@
 			<table>
 				<tr><td colspan="100%"><h2>Corporations</h2></td></tr>
 				<tr class="header">
-					<th v-for="prop in corporationData.corporationsProps" :key="prop.index">
+					<th>ID</th>
+					<th>Name</th>
+					<th>$</th>
+					<th>Focus</th>
+					<th>Jobs (Available)</th>
+					<th>Jobs (Active)</th>
+					<th>Jobs (Completed)</th>
+					<th>Drivers (Available)</th>
+					<th>Drivers (Active)</th>
+<!-- 					<th v-for="prop in corporationData.corporationsProps" :key="prop.index">
 						{{ prop }}
-					</th>
+					</th> -->
 				</tr>
 				<tr v-for="corporation in corporationData.corporations" :key="corporation.id">
-					<td v-for="(v, k) in corporation" :key="k['id']">
+					<td>{{ corporation.id }}</td>
+					<td>{{ corporation.name }}</td>
+					<td>{{ corporation.balance }}</td>
+					<td>{{ corporation.focus }}</td>
+					<td>{{ corporation.jobsAvailable }}</td>
+					<td>{{ corporation.jobsActive }}</td>
+					<td>{{ corporation.jobsCompleted }}</td>
+					<td>{{ corporation.driversCount }}</td>
+					<td>{{ corporation.driversActive }}</td>
+<!-- 					<td v-for="(v, k) in corporation" :key="k['id']">
 						{{ v }}
-					</td>
+					</td> -->
 				</tr>
 			</table>
 			<!-- factions -->
