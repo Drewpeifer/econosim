@@ -118,12 +118,14 @@ var jobList = [],
 // generates a single job
 // TODO: build in the following...
 // - Add job type, all current jobs are "deliveries"
+// - Add cargo type and amount to job
 // - Add % of cargo value to payouts for deliveries
-// - Add Source and Return job types
-// -- These have pickup and dropoff locations
-// -- Should accommodate arrays of locations
-// -- locations have a name, distance, and duration
-// -- modify regular deliveries to pull job duration from dropoff location
+// - Create hub location list
+// - Add arrays for job pickup and dropoff locations
+// - Add duration and distance to job locations (same var for now)
+// - Modify job.duration to be sum of location durations
+// - Add new payout calculations
+// - Modify regular deliveries to pull job duration from dropoff location
 function createJob(i, jobList) {
 	var job = {};
 
