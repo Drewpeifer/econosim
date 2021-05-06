@@ -1,14 +1,4 @@
 var economyData = {
-		commoditiesProps : [
-			// TODO - find a better way to show props
-			'ID',
-			'Name',
-			'NiceName',
-			'Base Price',
-			'Current Price',
-			'Flux',
-			'Unit Size'
-		],
 		commodities : [
 			{
 				id : 0,
@@ -53,12 +43,6 @@ var economyData = {
 		}
 	},
 	factionData = {
-		factionsProps : [
-			// TODO - find a better way to show props
-			'ID',
-			'Name',
-			'Focus'
-		],
 		factions : [
 			{
 				id : 0,
@@ -78,18 +62,6 @@ var economyData = {
 		],
 	},
 	corporationData = {
-		corporationsProps : [
-			// TODO - find a better way to show props
-			'ID',
-			'Name',
-			'$',
-			'Focus',
-			'Jobs (Available)',
-			'Jobs (Active)',
-			'Jobs (Completed)',
-			'Drivers (Total)',
-			'Drivers (Active)'
-		],
 		corporations : [
 			{
 				id : 0,
