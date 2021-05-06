@@ -59,6 +59,11 @@ function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 ////////////////
+// gets random entry from array
+function getRandomArrayItem(array) {
+	return array[getRandomInt(0, array.length - 1)];
+}
+////////////////
 // oscillates currentPrice value within flux range based on basePrice value and random roll
 function bgsBackgroundFlux(economyData) {
 	var possibleFlux = 0;
@@ -101,30 +106,78 @@ var jobList = [],
 	'Source and Return',
 	'Delay / Prevention'
 	],
-	hubLocations = [
+	hubList = [
 	'Player Hub 1'
 	],
-	clientLocations = [
-	'Bobs Construction',
-	'Mega Bites Burger Co.',
-	'SuperSlick Oil Filters Inc',
-	'Botanicorp Industries',
-	'MaxTrax Vinyl',
-	'Diesel Bros Auto Detailing',
-	'Quark\'s Bar',
-	'Garek\'s Simple Tailoring Service'
+	clientList = [
+		{
+			id : 0,
+			name : "Bob's Construction",
+			location : '123 Main Street',
+			distance : 5,
+			duration : 5
+		},
+		{
+			id : 1,
+			name : "Mega Bites Burger Co.",
+			location : '456 Market Street',
+			distance : 5,
+			duration : 5
+		},
+		{
+			id : 2,
+			name : "SuperSlick Oil Filters Inc",
+			location : '1001 Frost Street',
+			distance : 10,
+			duration : 10
+		},
+		{
+			id : 3,
+			name : "Botanicorp Industries",
+			location : '88 West End Ave',
+			distance : 10,
+			duration : 10
+		},
+		{
+			id :4,
+			name : "MaxTrax Vinyl",
+			location : '22 Cherry Boulevard',
+			distance : 15,
+			duration : 15
+		},
+		{
+			id : 5,
+			name : "Diesel Bros Auto Detailing",
+			location : '4345 Alphabet Circle',
+			distance : 15,
+			duration : 15
+		},
+		{
+			id : 6,
+			name : "Quark's Bar",
+			location : '101 West Promenade',
+			distance : 20,
+			duration : 20
+		},
+		{
+			id : 7,
+			name : "Garek's Simple Tailoring Service",
+			location : '634 East Promenade',
+			distance : 20,
+			duration : 20
+		},
 	];
 ////////////////
 // generates a single job
 // TODO: build in the following...
 // X Add job type, all current jobs are "deliveries"
 // X Add cargo type and amount to job
-// - Add % of cargo value to payouts for deliveries
 // X Create hub location list
 // - Add arrays for job pickup and dropoff locations
 // - Add duration and distance to job locations (same var for now)
 // - Modify job.duration to be sum of location durations
 // - Add new payout calculations
+// -- Add % of cargo value to payouts for deliveries
 // - Modify regular deliveries to pull job duration from dropoff location
 function createJob(i, jobList) {
 	var job = {};
@@ -133,18 +186,28 @@ function createJob(i, jobList) {
 	job.id = totalJobCount;
 	totalJobCount++;// increment now so ID stays unchanged, but title gets increment
 	job.title = "Job " + totalJobCount;
-	job.type = "none";
-	job.clientLocation = clientLocations[getRandomInt(0, clientLocations.length - 1)];
+	job.type = "Delivery";
+	job.client = getRandomArrayItem(clientList);
 	job.cargo = economyData.commodities[0];
 	job.cargoAmount = getRandomInt(50,500);
-	job.pickup = "Loc. #" + getRandomInt(0,100);
-	job.dropoff = "Loc. #" + getRandomInt(0,100);
+	job.pickup = [];
+	job.dropoff = [];
 	job.duration = getRandomInt(5,30);
 	job.riskLevel = getRandomInt(1,5);
 	job.active = false;
 	job.owner = '';
 	job.completed = false;
 	job.passed = false;
+
+	// set job type
+	job.type = getRandomArrayItem(jobTypes);
+	job.type = "Delivery";// override
+
+	// set job pickup and dropoff based on type
+	if (job.type === "Delivery") {
+		job.pickup = getRandomArrayItem(clientList);
+		job.dropoff = job.client
+	}
 
 	// calculate payout based on duration and risk level
 	var payout = getRandomInt(1000,3000);// pick random base
@@ -167,6 +230,8 @@ $(function() {
 		const timeInSeconds = Math.round(timer.getTime() / 1000);
 		document.getElementById('time').innerText = timeInSeconds;
 	}, 100);
+	console.log('clients');
+	console.dir(clientList);
 	///////////////////////////////////////
 	// bind controls
 	$('#pauseTimer').bind('click', function() {
@@ -246,6 +311,7 @@ var app = new Vue({
 		bgsJobDistribution : function() {
 			console.log('distributing available jobs...');
 
+			// randomize the order in which companies pick their jobs (for fairness)
 			var shuffledCorps = this.corporationData.corporations
 				.map((a) => ({sort: Math.random(), value: a}))
 				.sort((a, b) => a.sort - b.sort)
@@ -261,7 +327,7 @@ var app = new Vue({
 					return;
 				} else {
 					// select a random job from the available list
-					var selectedJob = jobList[getRandomInt(0,jobList.length-1)];
+					var selectedJob = getRandomArrayItem(jobList);
 					// activate that job
 					selectedJob.active = true;
 					// set ownership of job
