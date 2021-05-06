@@ -117,10 +117,10 @@ var jobList = [],
 ////////////////
 // generates a single job
 // TODO: build in the following...
-// - Add job type, all current jobs are "deliveries"
-// - Add cargo type and amount to job
+// X Add job type, all current jobs are "deliveries"
+// X Add cargo type and amount to job
 // - Add % of cargo value to payouts for deliveries
-// - Create hub location list
+// X Create hub location list
 // - Add arrays for job pickup and dropoff locations
 // - Add duration and distance to job locations (same var for now)
 // - Modify job.duration to be sum of location durations
@@ -135,6 +135,8 @@ function createJob(i, jobList) {
 	job.title = "Job " + totalJobCount;
 	job.type = "none";
 	job.clientLocation = clientLocations[getRandomInt(0, clientLocations.length - 1)];
+	job.cargo = economyData.commodities[0];
+	job.cargoAmount = getRandomInt(50,500);
 	job.pickup = "Loc. #" + getRandomInt(0,100);
 	job.dropoff = "Loc. #" + getRandomInt(0,100);
 	job.duration = getRandomInt(5,30);
@@ -150,6 +152,7 @@ function createJob(i, jobList) {
 	payout = payout * job.riskLevel;// multiply by riskLevel
 	payout = Math.floor(payout + ((payout/100) * job.duration));// multiply duration in mins by 1% of payout, add to total payout
 	job.payout = payout;// set payout on job
+	console.log('Created Job:');
 	console.dir(job);
 	jobList.push(job);// push job to jobList
 }
