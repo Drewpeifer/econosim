@@ -34,187 +34,185 @@
 		<button id="pauseTimer">Pause</button><button id="resetTimer">Reset*</button>
 		<p><i>*Resets the timer, not the data</i></p>
 		<hr />
-		<div class="left-col">
-			<!-- economy -->
-			<div class="table-wrapper">
-				<table>
-					<tr><td colspan="100%"><h2>Economy</h2></td></tr>
-					<tr class="header">
-						<th>ID</th>
-						<th>Name</th>
-						<th>Nice Name</th>
-						<th>Base Price</th>
-						<th>Current<br />Price</th>
-						<th>Flux</th>
-						<th>Unit Size</th>
-					</tr>
-					<tr v-for="commodity in economyData.commodities" :key="commodity.id">
-						<td>{{ commodity.id }}</td>
-						<td>{{ commodity.name }}</td>
-						<td>{{ commodity.niceName }}</td>
-						<td>{{ commodity.priceBase }}</td>
-						<td :class="{ sale: commodity.priceCurrent < commodity.priceBase }">{{ commodity.priceCurrent }}</td>
-						<td>{{ commodity.flux }}</td>
-						<td>{{ commodity.unitSize }}</td>
-					</tr>
-				</table>
-			</div>
-			<!-- factions -->
-			<div class="table-wrapper" style="display:none;">
-				<table>
-					<tr><td colspan="100%"><h2>Factions</h2></td></tr>
-					<tr class="header">
-						<th v-for="prop in factionData.factionsProps" :key="prop.index">
-							{{ prop }}
-						</th>
-					</tr>
-					<tr v-for="faction in factionData.factions" :key="faction.id">
-						<td v-for="(v, k) in faction" :key="k['id']">
-							{{ v }}
-						</td>
-					</tr>
-				</table>
-			</div>
-			<!-- jobs -->
-			<div class="table-wrapper">
-				<table>
-					<tr>
-						<td colspan="100%"><h2>Jobs (Available = <span id="availableCount">0</span>, Total = <span id="jobCount">0</span>)</h2></td>
-					</tr>
-					<tr class="header">
-						<th>ID</th>
-						<th>Title</th>
-						<th>Client Location</th>
-						<th>Pickup</th>
-						<th>Dropoff</th>
-						<th>Duration</th>
-						<th>Risk</th>
-						<th>Active</th>
-						<th>Owner</th>
-						<th>Completed</th>
-						<th>Passed</th>
-						<th>Payout</th>
-					</tr>
-					<tr v-for="job in jobList" :key="job.id">
-						<td>{{ job.id }}</td>
-						<td>{{ job.title }}</td>
-						<td>{{ job.clientLocation }}</td>
-						<td>{{ job.pickup }}</td>
-						<td>{{ job.dropoff }}</td>
-						<td>{{ job.duration }}</td>
-						<td>{{ job.riskLevel }}</td>
-						<td>{{ job.active }}</td>
-						<td>{{ job.owner }}</td>
-						<td>{{ job.completed }}</td>
-						<td>{{ job.passed }}</td>
-						<td>{{ job.payout }}</td>
-					</tr>
-				</table>
-			</div>
-			<!-- active jobs -->
-			<div class="table-wrapper">
-				<table>
-					<tr>
-						<td colspan="100%"><h2>Active Jobs (<span id="activeCount">0</span>)</h2></td>
-					</tr>
-					<tr class="header">
-						<th>ID</th>
-						<th>Title</th>
-						<th>Client Location</th>
-						<th>Pickup</th>
-						<th>Dropoff</th>
-						<th>Duration</th>
-						<th>Risk</th>
-						<th>Active</th>
-						<th>Owner</th>
-						<th>Completed</th>
-						<th>Passed</th>
-						<th>Payout</th>
-					</tr>
-					<tr v-for="job in activeJobList" :key="job.id">
-						<td>{{ job.id }}</td>
-						<td>{{ job.title }}</td>
-						<td>{{ job.clientLocation }}</td>
-						<td>{{ job.pickup }}</td>
-						<td>{{ job.dropoff }}</td>
-						<td>{{ job.duration }}</td>
-						<td>{{ job.riskLevel }}</td>
-						<td>{{ job.active }}</td>
-						<td>{{ job.owner }}</td>
-						<td>{{ job.completed }}</td>
-						<td>{{ job.passed }}</td>
-						<td>{{ job.payout }}</td>
-					</tr>
-				</table>
-			</div>
+		<!-- economy -->
+		<div class="table-wrapper">
+			<table>
+				<tr><td colspan="100%"><h2>Economy</h2></td></tr>
+				<tr class="header">
+					<th>ID</th>
+					<th>Name</th>
+					<th>Nice Name</th>
+					<th>Base Price</th>
+					<th>Current<br />Price</th>
+					<th>Flux</th>
+					<th>Unit Size</th>
+				</tr>
+				<tr v-for="commodity in economyData.commodities" :key="commodity.id">
+					<td>{{ commodity.id }}</td>
+					<td>{{ commodity.name }}</td>
+					<td>{{ commodity.niceName }}</td>
+					<td>{{ commodity.priceBase }}</td>
+					<td :class="{ sale: commodity.priceCurrent < commodity.priceBase }">{{ commodity.priceCurrent }}</td>
+					<td>{{ commodity.flux }}</td>
+					<td>{{ commodity.unitSize }}</td>
+				</tr>
+			</table>
 		</div>
-		<div class="right-col">
-			<!-- corporations -->
-			<div class="table-wrapper">
-				<table>
-					<tr><td colspan="100%"><h2>Corporations</h2></td></tr>
-					<tr class="header">
-						<th>ID</th>
-						<th>Name</th>
-						<th>$</th>
-						<th>Focus</th>
-						<th>Jobs (Available)</th>
-						<th>Jobs (Active)</th>
-						<th>Jobs (Passed)</th>
-						<th>Jobs (Failed)</th>
-						<th>Drivers (Available)</th>
-						<th>Drivers (Active)</th>
-					</tr>
-					<tr v-for="corporation in corporationData.corporations" :key="corporation.id">
-						<td>{{ corporation.id }}</td>
-						<td>{{ corporation.name }}</td>
-						<td :class="{ leader: corporation.highestBalance }">{{ corporation.balance }}</td>
-						<td>{{ corporation.focus }}</td>
-						<td>{{ corporation.jobsAvailable }}</td>
-						<td>{{ corporation.jobsActive }}</td>
-						<td>{{ corporation.jobsPassed }}</td>
-						<td>{{ corporation.jobsFailed }}</td>
-						<td>{{ corporation.driversCount }}</td>
-						<td>{{ corporation.driversActive }}</td>
-					</tr>
-				</table>
-			</div>
-			<!-- archived jobs -->
-			<div class="table-wrapper">
-				<table>
-					<tr>
-						<td colspan="100%"><h2>Archived Jobs (<span id="archivedCount">0</span>)</h2></td>
-					</tr>
-					<tr class="header">
-						<th>ID</th>
-						<th>Title</th>
-						<th>Client Location</th>
-						<th>Pickup</th>
-						<th>Dropoff</th>
-						<th>Duration</th>
-						<th>Risk</th>
-						<th>Active</th>
-						<th>Owner</th>
-						<th>Completed</th>
-						<th>Passed</th>
-						<th>Payout</th>
-					</tr>
-					<tr v-for="job in archivedJobList" :key="job.id">
-						<td>{{ job.id }}</td>
-						<td>{{ job.title }}</td>
-						<td>{{ job.clientLocation }}</td>
-						<td>{{ job.pickup }}</td>
-						<td>{{ job.dropoff }}</td>
-						<td>{{ job.duration }}</td>
-						<td>{{ job.riskLevel }}</td>
-						<td>{{ job.active }}</td>
-						<td>{{ job.owner }}</td>
-						<td>{{ job.completed }}</td>
-						<td :class="{ pass: job.passed }">{{ job.passed }}</td>
-						<td>{{ job.payout }}</td>
-					</tr>
-				</table>
-			</div>
+		<!-- corporations -->
+		<div class="table-wrapper">
+			<table>
+				<tr><td colspan="100%"><h2>Corporations</h2></td></tr>
+				<tr class="header">
+					<th>ID</th>
+					<th>Name</th>
+					<th>$</th>
+					<th>Focus</th>
+					<th>Jobs (Available)</th>
+					<th>Jobs (Active)</th>
+					<th>Jobs (Passed)</th>
+					<th>Jobs (Failed)</th>
+					<th>Drivers (Available)</th>
+					<th>Drivers (Active)</th>
+				</tr>
+				<tr v-for="corporation in corporationData.corporations" :key="corporation.id">
+					<td>{{ corporation.id }}</td>
+					<td>{{ corporation.name }}</td>
+					<td :class="{ leader: corporation.highestBalance }">{{ corporation.balance }}</td>
+					<td>{{ corporation.focus }}</td>
+					<td>{{ corporation.jobsAvailable }}</td>
+					<td>{{ corporation.jobsActive }}</td>
+					<td>{{ corporation.jobsPassed }}</td>
+					<td>{{ corporation.jobsFailed }}</td>
+					<td>{{ corporation.driversCount }}</td>
+					<td>{{ corporation.driversActive }}</td>
+				</tr>
+			</table>
+		</div>
+		<!-- factions -->
+<!-- 		<div class="table-wrapper" style="display:none;">
+			<table>
+				<tr><td colspan="100%"><h2>Factions</h2></td></tr>
+				<tr class="header">
+					<th v-for="prop in factionData.factionsProps" :key="prop.index">
+						{{ prop }}
+					</th>
+				</tr>
+				<tr v-for="faction in factionData.factions" :key="faction.id">
+					<td v-for="(v, k) in faction" :key="k['id']">
+						{{ v }}
+					</td>
+				</tr>
+			</table>
+		</div> -->
+		<!-- jobs -->
+		<div class="table-wrapper">
+			<table>
+				<tr>
+					<td colspan="100%"><h2>Jobs (Available = <span id="availableCount">0</span>, Total = <span id="jobCount">0</span>)</h2></td>
+				</tr>
+				<tr class="header">
+					<th>ID</th>
+					<th>Title</th>
+					<th>Type</th>
+					<th>Client Name</th>
+					<th>Pickup(s)</th>
+					<th>Dropoff(s)</th>
+					<th>Duration</th>
+					<th>Risk</th>
+					<th>Active</th>
+					<th>Owner</th>
+					<th>Completed</th>
+					<th>Passed</th>
+					<th>Payout</th>
+				</tr>
+				<tr v-for="job in jobList" :key="job.id">
+					<td>{{ job.id }}</td>
+					<td>{{ job.title }}</td>
+					<td>{{ job.type }}</td>
+					<td>{{ job.client.name }}</td>
+					<td>{{ job.pickup.name }} : {{ job.pickup.location }}</td>
+					<td>{{ job.dropoff.name }} : {{ job.dropoff.location }}</td>
+					<td>{{ job.duration }}</td>
+					<td>{{ job.riskLevel }}</td>
+					<td>{{ job.active }}</td>
+					<td>{{ job.owner }}</td>
+					<td>{{ job.completed }}</td>
+					<td>{{ job.passed }}</td>
+					<td>{{ job.payout }}</td>
+				</tr>
+			</table>
+		</div>
+		<!-- active jobs -->
+		<div class="table-wrapper">
+			<table>
+				<tr>
+					<td colspan="100%"><h2>Active Jobs (<span id="activeCount">0</span>)</h2></td>
+				</tr>
+				<tr class="header">
+					<th>ID</th>
+					<th>Title</th>
+					<th>Client Name</th>
+					<th>Pickup(s)</th>
+					<th>Dropoff(s)</th>
+					<th>Duration</th>
+					<th>Risk</th>
+					<th>Active</th>
+					<th>Owner</th>
+					<th>Completed</th>
+					<th>Passed</th>
+					<th>Payout</th>
+				</tr>
+				<tr v-for="job in activeJobList" :key="job.id">
+					<td>{{ job.id }}</td>
+					<td>{{ job.title }}</td>
+					<td>{{ job.client.name }}</td>
+					<td>{{ job.pickup.name }} : {{ job.pickup.location }}</td>
+					<td>{{ job.dropoff.name }} : {{ job.dropoff.location }}</td>
+					<td>{{ job.duration }}</td>
+					<td>{{ job.riskLevel }}</td>
+					<td>{{ job.active }}</td>
+					<td>{{ job.owner }}</td>
+					<td>{{ job.completed }}</td>
+					<td>{{ job.passed }}</td>
+					<td>{{ job.payout }}</td>
+				</tr>
+			</table>
+		</div>
+		<!-- archived jobs -->
+		<div class="table-wrapper">
+			<table>
+				<tr>
+					<td colspan="100%"><h2>Archived Jobs (<span id="archivedCount">0</span>)</h2></td>
+				</tr>
+				<tr class="header">
+					<th>ID</th>
+					<th>Title</th>
+					<th>Client Name</th>
+					<th>Pickup(s)</th>
+					<th>Dropoff(s)</th>
+					<th>Duration</th>
+					<th>Risk</th>
+					<th>Active</th>
+					<th>Owner</th>
+					<th>Completed</th>
+					<th>Passed</th>
+					<th>Payout</th>
+				</tr>
+				<tr v-for="job in archivedJobList" :key="job.id">
+					<td>{{ job.id }}</td>
+					<td>{{ job.title }}</td>
+					<td>{{ job.client.name }}</td>
+					<td>{{ job.pickup.name }} : {{ job.pickup.location }}</td>
+					<td>{{ job.dropoff.name }} : {{ job.dropoff.location }}</td>
+					<td>{{ job.duration }}</td>
+					<td>{{ job.riskLevel }}</td>
+					<td>{{ job.active }}</td>
+					<td>{{ job.owner }}</td>
+					<td>{{ job.completed }}</td>
+					<td :class="{ pass: job.passed }">{{ job.passed }}</td>
+					<td>{{ job.payout }}</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 	<script src="js/scripts.js"></script>
