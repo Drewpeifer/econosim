@@ -102,8 +102,8 @@ var jobList = [],
 	jobTypes = [
 	'Hub Delivery',
 	'Delivery',
-	// 'Multi-Point Delivery',
-	// 'Source and Return',
+	'Multi-Point Delivery',
+	'Source and Return',
 	// 'Delay / Prevention'
 	],
 	hubList = [
@@ -195,13 +195,32 @@ function createJob(i, jobList) {
 	job.completed = false;
 	job.passed = false;
 
-	// set job pickup and dropoff based on type
-	if (job.type === "Hub Delivery") {
-		job.pickup.push(hubList[0]);
-		job.dropoff.push(job.client);
-	} else if (job.type === "Delivery") {
-		job.pickup.push(getRandomArrayItem(clientList));
-		job.dropoff.push(job.client);
+	console.log(job.title + ' is ' + job.type);
+
+	switch (job.type) {
+		case 'Hub Delivery':
+			console.log('its a hub!');
+			job.pickup.push(hubList[0]);
+			job.dropoff.push(job.client);
+			break;
+		case 'Delivery':
+		case 'Source and Return':
+			// for now, setting S&R missions to have pickup = client so it adds to the duration of the job,
+			// but normally this will be blank
+			console.log('its a reg!');
+			job.pickup.push(getRandomArrayItem(clientList));
+			job.dropoff.push(job.client);
+			break;
+		case 'Multi-Point Delivery':
+			var numberOfPickups = getRandomInt(2,4);// limiting possible pickups to 4 for now
+			console.log('its a multipoint');
+			for (var i = 0; i < numberOfPickups; i++) {
+				console.log('i = ' + i + ', numberofpickups = ' + numberOfPickups);
+				job.pickup.push(getRandomArrayItem(clientList));
+			}
+			job.dropoff.push(job.client);
+		default:
+		console.log('ERROR: Job type unknown');
 	}
 
 	// set duration of job based on durations of pickup + dropoff
@@ -217,14 +236,16 @@ function createJob(i, jobList) {
 	// calculate payout based on duration and risk level
 	var payout = getRandomInt(1000,3000);// pick random base payout
 
-console.log('payout');
 	payout = payout * job.riskLevel;// multiply by riskLevel
-	console.log(payout);
-	payout = Math.floor(payout + ((payout/100) * job.duration));// multiply duration in mins by 1% of payout, add to total payout
-	console.log(payout);
+	payout = payout + ((payout/100) * job.duration);// multiply duration in mins by 1% of payout, add to total payout
 	payout = payout + (job.cargoAmount * (job.cargo.priceBase * .1));// add 10% commission based on price of goods transported
-	console.log(payout);
-	job.payout = payout;// set payout on job
+	if (job.type === 'Source and Return') {
+		// add cost of goods plus 10% surcharge for S&R jobs
+		var currentWorthOfGoods = job.cargoAmount * job.cargo.priceBase;
+		payout = payout + (currentWorthOfGoods * .1) + (currentWorthOfGoods);
+	}
+
+	job.payout = Math.floor(payout);// set payout on job
 	console.log('Created Job:');
 	console.dir(job);
 	jobList.push(job);// push job to jobList
