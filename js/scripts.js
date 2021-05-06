@@ -175,15 +175,6 @@ var jobList = [],
 	];
 ////////////////
 // generates a single job
-// TODO: build in the following...
-// X Add job type, all current jobs are "deliveries"
-// X Add cargo type and amount to job
-// X Create hub location list
-// X Add arrays for job pickup and dropoff locations
-// X Add duration and distance to job locations (same var for now)
-// X Modify job.duration to be sum of location durations
-// - Add new payout calculations
-// -- Add % of cargo value to payouts for deliveries
 function createJob(i, jobList) {
 	var job = {};
 

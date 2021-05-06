@@ -132,8 +132,8 @@
 					<td>{{ job.title }}</td>
 					<td>{{ job.type }}</td>
 					<td>{{ job.client.name }}</td>
-					<td>{{ job.pickup.length === 1 ? job.pickup[0].name + " : " + job.pickup[0].location : job.pickup[0].name + " : " + job.pickup[0].location + " and " + (job.pickup.length - 1) + "more..." }}</td>
-					<td>{{ job.dropoff.length === 1 ? job.dropoff[0].name + " : " + job.dropoff[0].location : job.dropoff[0].name + " : " + job.dropoff[0].location + " and " + (job.dropoff.length - 1) + "more..." }}</td>
+					<td>{{ job.pickup.length === 1 ? job.pickup[0].name + " : " + job.pickup[0].location : job.pickup[0].name + " : " + job.pickup[0].location + " and " + (job.pickup.length - 1) + " more..." }}</td>
+					<td>{{ job.dropoff.length === 1 ? job.dropoff[0].name + " : " + job.dropoff[0].location : job.dropoff[0].name + " : " + job.dropoff[0].location + " and " + (job.dropoff.length - 1) + " more..." }}</td>
 					<td>{{ job.duration }}</td>
 					<td>{{ job.cargo.niceName }}</td>
 					<td>{{ job.cargoAmount }}</td>
@@ -155,10 +155,13 @@
 				<tr class="header">
 					<th>ID</th>
 					<th>Title</th>
+					<th>Type</th>
 					<th>Client Name</th>
 					<th>Pickup(s)</th>
 					<th>Dropoff(s)</th>
 					<th>Duration</th>
+					<th>Cargo</th>
+					<th>Amount</th>
 					<th>Risk</th>
 					<th>Active</th>
 					<th>Owner</th>
@@ -169,13 +172,16 @@
 				<tr v-for="job in activeJobList" :key="job.id">
 					<td>{{ job.id }}</td>
 					<td>{{ job.title }}</td>
+					<td>{{ job.type }}</td>
 					<td>{{ job.client.name }}</td>
-					<td>{{ job.pickup.name }} : {{ job.pickup.location }}</td>
-					<td>{{ job.dropoff.name }} : {{ job.dropoff.location }}</td>
+					<td>{{ job.pickup.length === 1 ? job.pickup[0].name + " : " + job.pickup[0].location : job.pickup[0].name + " : " + job.pickup[0].location + " and " + (job.pickup.length - 1) + " more..." }}</td>
+					<td>{{ job.dropoff.length === 1 ? job.dropoff[0].name + " : " + job.dropoff[0].location : job.dropoff[0].name + " : " + job.dropoff[0].location + " and " + (job.dropoff.length - 1) + " more..." }}</td>
 					<td>{{ job.duration }}</td>
+					<td>{{ job.cargo.niceName }}</td>
+					<td>{{ job.cargoAmount }}</td>
 					<td>{{ job.riskLevel }}</td>
 					<td>{{ job.active }}</td>
-					<td>{{ job.owner }}</td>
+					<td>{{ job.owner.name }}</td>
 					<td>{{ job.completed }}</td>
 					<td>{{ job.passed }}</td>
 					<td>{{ job.payout }}</td>
@@ -191,10 +197,13 @@
 				<tr class="header">
 					<th>ID</th>
 					<th>Title</th>
+					<th>Type</th>
 					<th>Client Name</th>
 					<th>Pickup(s)</th>
 					<th>Dropoff(s)</th>
 					<th>Duration</th>
+					<th>Cargo</th>
+					<th>Amount</th>
 					<th>Risk</th>
 					<th>Active</th>
 					<th>Owner</th>
@@ -205,13 +214,16 @@
 				<tr v-for="job in archivedJobList" :key="job.id">
 					<td>{{ job.id }}</td>
 					<td>{{ job.title }}</td>
+					<td>{{ job.type }}</td>
 					<td>{{ job.client.name }}</td>
-					<td>{{ job.pickup.name }} : {{ job.pickup.location }}</td>
-					<td>{{ job.dropoff.name }} : {{ job.dropoff.location }}</td>
+					<td>{{ job.pickup.length === 1 ? job.pickup[0].name + " : " + job.pickup[0].location : job.pickup[0].name + " : " + job.pickup[0].location + " and " + (job.pickup.length - 1) + " more..." }}</td>
+					<td>{{ job.dropoff.length === 1 ? job.dropoff[0].name + " : " + job.dropoff[0].location : job.dropoff[0].name + " : " + job.dropoff[0].location + " and " + (job.dropoff.length - 1) + " more..." }}</td>
 					<td>{{ job.duration }}</td>
+					<td>{{ job.cargo.niceName }}</td>
+					<td>{{ job.cargoAmount }}</td>
 					<td>{{ job.riskLevel }}</td>
 					<td>{{ job.active }}</td>
-					<td>{{ job.owner }}</td>
+					<td>{{ job.owner.name }}</td>
 					<td>{{ job.completed }}</td>
 					<td :class="{ pass: job.passed }">{{ job.passed }}</td>
 					<td>{{ job.payout }}</td>
