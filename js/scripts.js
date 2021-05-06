@@ -173,12 +173,11 @@ var jobList = [],
 // X Add job type, all current jobs are "deliveries"
 // X Add cargo type and amount to job
 // X Create hub location list
-// - Add arrays for job pickup and dropoff locations
-// - Add duration and distance to job locations (same var for now)
-// - Modify job.duration to be sum of location durations
+// X Add arrays for job pickup and dropoff locations
+// X Add duration and distance to job locations (same var for now)
+// X Modify job.duration to be sum of location durations
 // - Add new payout calculations
 // -- Add % of cargo value to payouts for deliveries
-// - Modify regular deliveries to pull job duration from dropoff location
 function createJob(i, jobList) {
 	var job = {};
 
@@ -205,9 +204,19 @@ function createJob(i, jobList) {
 
 	// set job pickup and dropoff based on type
 	if (job.type === "Delivery") {
-		job.pickup = getRandomArrayItem(clientList);
-		job.dropoff = job.client
+		job.pickup.push(getRandomArrayItem(clientList));
+		job.dropoff.push(job.client);
 	}
+
+	// set duration of job based on durations of pickup + dropoff
+	var durationSum = 0;
+	$.each(job.pickup, function(i, v) {
+		durationSum = durationSum + v.duration;
+	});
+	$.each(job.dropoff, function(i, v) {
+		durationSum = durationSum + v.duration;
+	});
+	job.duration = durationSum;
 
 	// calculate payout based on duration and risk level
 	var payout = getRandomInt(1000,3000);// pick random base
