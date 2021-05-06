@@ -50,6 +50,7 @@ class Timer {
 		return this.overallTime;
 	}
 }
+////////////////
 // provides random integer between min and max (inclusive)
 function getRandomInt(min, max) {
 	// inclusive
@@ -57,6 +58,7 @@ function getRandomInt(min, max) {
 	max = Math.floor(max);
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+////////////////
 // oscillates currentPrice value within flux range based on basePrice value and random roll
 function bgsBackgroundFlux(economyData) {
 	var possibleFlux = 0;
@@ -71,6 +73,7 @@ function bgsBackgroundFlux(economyData) {
 
 	console.log('prices changed');
 }
+////////////////
 // flag the object with the highest value for a prop given
 // the prop, the flag prop (what to set to "true"), and the array of objects
 function flagHighestProp(prop, flagProp, array) {
@@ -84,9 +87,9 @@ function flagHighestProp(prop, flagProp, array) {
 	console.log('flagging highest ' + prop + '...');
 	console.dir(leader);
 }
+////////////////
 // jobData
-// each job will have the following attributes:
-// title, client, payout, cargo, destination, timeLimit
+// defines properties for jobs as they are created, stores static job-related data
 var jobList = [],
 	activeJobList = [],
 	archivedJobList = [],
@@ -115,6 +118,7 @@ var jobList = [],
 	'Quark\'s Bar',
 	'Garek\'s Simple Tailoring Service'
 	];
+////////////////
 // generates a single job
 function createJob(i, jobList) {
 	var job = {};
@@ -142,7 +146,8 @@ function createJob(i, jobList) {
 	console.dir(job);
 	jobList.push(job);// push job to jobList
 }
-
+////////////////
+// on load
 $(function() {
 	///////////////////////////////////////
 	// on page load, instantiate new timer
@@ -192,7 +197,8 @@ $(function() {
 		}
 	}, 1000);
 });
-
+/////////////////////////////////////
+// define Vue app config and methods
 var app = new Vue({
 	el: '#app',
 	data: {
