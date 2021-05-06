@@ -394,7 +394,7 @@ var app = new Vue({
 			// that risk level 5 = ~55% chance of success (we exclude 0)
 			var risk = job.riskLevel,
 				chance = getRandomInt(1,10),
-				owner = this.corporationData.corporations.find(item => item.name === job.owner);
+				owner = job.owner;
 
 			// calculate pass/fail
 			if (chance >= risk) {
