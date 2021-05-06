@@ -94,6 +94,16 @@ var jobList = [],
 	activeJobList = [],
 	archivedJobList = [],
 	totalJobCount = 0,
+	jobTypes = [
+	'Hub Delivery',
+	'Delivery',
+	'Multi-Point Delivery',
+	'Source and Return',
+	'Delay / Prevention'
+	],
+	hubLocations = [
+	'Player Hub 1'
+	],
 	clientLocations = [
 	'Bobs Construction',
 	'Mega Bites Burger Co.',
@@ -121,6 +131,7 @@ function createJob(i, jobList) {
 	job.id = totalJobCount;
 	totalJobCount++;// increment now so ID stays unchanged, but title gets increment
 	job.title = "Job " + totalJobCount;
+	job.type = "none";
 	job.clientLocation = clientLocations[getRandomInt(0, clientLocations.length - 1)];
 	job.pickup = "Loc. #" + getRandomInt(0,100);
 	job.dropoff = "Loc. #" + getRandomInt(0,100);
