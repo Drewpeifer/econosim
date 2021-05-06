@@ -102,12 +102,18 @@ var jobList = [],
 	jobTypes = [
 	'Hub Delivery',
 	'Delivery',
-	'Multi-Point Delivery',
-	'Source and Return',
-	'Delay / Prevention'
+	// 'Multi-Point Delivery',
+	// 'Source and Return',
+	// 'Delay / Prevention'
 	],
 	hubList = [
-	'Player Hub 1'
+		{
+			id : 0,
+			name : "Player Hub 1",
+			location : '101 Center City',
+			distance : 0,
+			duration : 0
+		}
 	],
 	clientList = [
 		{
@@ -127,7 +133,7 @@ var jobList = [],
 		{
 			id : 2,
 			name : "SuperSlick Oil Filters Inc",
-			location : '1001 Frost Street',
+			location : '2001 Frost Street',
 			distance : 10,
 			duration : 10
 		},
@@ -155,7 +161,7 @@ var jobList = [],
 		{
 			id : 6,
 			name : "Quark's Bar",
-			location : '101 West Promenade',
+			location : '791 West Promenade',
 			distance : 20,
 			duration : 20
 		},
@@ -185,9 +191,9 @@ function createJob(i, jobList) {
 	job.id = totalJobCount;
 	totalJobCount++;// increment now so ID stays unchanged, but title gets increment
 	job.title = "Job " + totalJobCount;
-	job.type = "Delivery";
+	job.type = getRandomArrayItem(jobTypes);
 	job.client = getRandomArrayItem(clientList);
-	job.cargo = economyData.commodities[0];
+	job.cargo = getRandomArrayItem(economyData.commodities);
 	job.cargoAmount = getRandomInt(50,500);
 	job.pickup = [];
 	job.dropoff = [];
@@ -198,12 +204,11 @@ function createJob(i, jobList) {
 	job.completed = false;
 	job.passed = false;
 
-	// set job type
-	job.type = getRandomArrayItem(jobTypes);
-	job.type = "Delivery";// override
-
 	// set job pickup and dropoff based on type
-	if (job.type === "Delivery") {
+	if (job.type === "Hub Delivery") {
+		job.pickup.push(hubList[0]);
+		job.dropoff.push(job.client);
+	} else if (job.type === "Delivery") {
 		job.pickup.push(getRandomArrayItem(clientList));
 		job.dropoff.push(job.client);
 	}
@@ -219,10 +224,15 @@ function createJob(i, jobList) {
 	job.duration = durationSum;
 
 	// calculate payout based on duration and risk level
-	var payout = getRandomInt(1000,3000);// pick random base
+	var payout = getRandomInt(1000,3000);// pick random base payout
 
+console.log('payout');
 	payout = payout * job.riskLevel;// multiply by riskLevel
+	console.log(payout);
 	payout = Math.floor(payout + ((payout/100) * job.duration));// multiply duration in mins by 1% of payout, add to total payout
+	console.log(payout);
+	payout = payout + (job.cargoAmount * (job.cargo.priceBase * .1));// add 10% commission based on price of goods transported
+	console.log(payout);
 	job.payout = payout;// set payout on job
 	console.log('Created Job:');
 	console.dir(job);
@@ -340,7 +350,7 @@ var app = new Vue({
 					// activate that job
 					selectedJob.active = true;
 					// set ownership of job
-					selectedJob.owner = v.name;
+					selectedJob.owner = v;
 					// modify relevant quantities
 					v.driversCount--;
 					v.driversActive++;
