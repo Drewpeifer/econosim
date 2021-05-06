@@ -26,10 +26,21 @@ li {
 a {
 	color: #42b983;
 }
-.wrapper,
-table {
+.wrapper {
 	width: 95%;
 	margin: 20px auto;
+}
+.table-wrapper {
+	display: block;
+	max-height: 250px;
+	overflow-y: scroll;
+	border: 2px solid black;
+	margin: 10px 0;
+	-ms-overflow-style: none;  /* IE and Edge */
+	scrollbar-width: none;  /* Firefox */
+}
+.table-wrapper::-webkit-scrollbar {
+	display: none;
 }
 .left-col, .right-col {
 	display: inline-block;
@@ -43,6 +54,13 @@ table {
 .right-col {
 	width: 48%;
 }
+table {
+	width: 100%;
+}
+table tbody tr:first-child {
+	position: sticky;
+	top: 0;
+}
 table, tr, th, td {
 	border-collapse: collapse;
 	border: 1px #333 solid;
@@ -53,7 +71,6 @@ tr td h2 {
 tr.header {
 	background: #333;
 	color: #fff;
-	margin-top: 20px;
 }
 tr.header th {
 	border-right: #888 1px solid;
