@@ -94,7 +94,7 @@ var jobList = [],
 	activeJobList = [],
 	archivedJobList = [],
 	totalJobCount = 0,
-	clients = [
+	clientLocations = [
 	'Bobs Construction',
 	'Mega Bites Burger Co.',
 	'SuperSlick Oil Filters Inc',
@@ -106,6 +106,14 @@ var jobList = [],
 	];
 ////////////////
 // generates a single job
+// TODO: build in the following...
+// - Add job type, all current jobs are "deliveries"
+// - Add % of cargo value to payouts for deliveries
+// - Add Source and Return job types
+// -- These have pickup and dropoff locations
+// -- Should accommodate arrays of locations
+// -- locations have a name, distance, and duration
+// -- modify regular deliveries to pull job duration from dropoff location
 function createJob(i, jobList) {
 	var job = {};
 
@@ -113,7 +121,7 @@ function createJob(i, jobList) {
 	job.id = totalJobCount;
 	totalJobCount++;// increment now so ID stays unchanged, but title gets increment
 	job.title = "Job " + totalJobCount;
-	job.client = clients[getRandomInt(0, clients.length - 1)];
+	job.clientLocation = clientLocations[getRandomInt(0, clientLocations.length - 1)];
 	job.pickup = "Loc. #" + getRandomInt(0,100);
 	job.dropoff = "Loc. #" + getRandomInt(0,100);
 	job.duration = getRandomInt(5,30);
