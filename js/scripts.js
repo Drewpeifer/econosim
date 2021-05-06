@@ -93,20 +93,6 @@ function flagHighestProp(prop, flagProp, array) {
 var jobList = [],
 	activeJobList = [],
 	archivedJobList = [],
-	jobProps = [
-	'ID',
-	'Title',
-	'Client',
-	'Pickup',
-	'Dropoff',
-	'Duration',
-	'Risk',
-	'Active',
-	'Owner',
-	'Completed',
-	'Passed',
-	'Payout'
-	],
 	totalJobCount = 0,
 	clients = [
 	'Bobs Construction',
@@ -208,7 +194,6 @@ var app = new Vue({
 		jobList : jobList,
 		activeJobList : activeJobList,
 		archivedJobList : archivedJobList,
-		jobProps : jobProps,
 		totalJobCount : totalJobCount,
 		timer : window.timer
 	},
