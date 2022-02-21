@@ -7,7 +7,7 @@
 	font-size: 12px;
 }
 body {
-	background: #f2f2f2;
+	background: #fff;
 }
 button.paused {
 	background: yellow;
@@ -67,6 +67,7 @@ table, tr, th, td {
 }
 tr td h2 {
 	margin: 0;
+	background: #fff;
 }
 tr.header {
 	background: #333;
